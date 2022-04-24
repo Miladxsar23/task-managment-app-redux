@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import TaskPage from "./components/Taskpage/TaskPage";
 import { connect } from "react-redux";
+import { createTask, changeStatus } from "./actions";
 class App extends Component {
-  onCreateTask = (newTask) => {
-    const action = { type: "CREATE_TASK", payLoad: { newTask } };
-    this.props.dispatch(action);
+  onCreateTask = ({ title, description }) => {
+    this.props.dispatch(createTask({ title, description }));
   };
+  onChangeStatus = ({id, newStatus}) => {
+    this.props.dispatch(changeStatus({id, newStatus}))
+  }
   render() {
     return (
       <div className="App p-4">
-        <TaskPage tasks={this.props.tasks} onCreateTask={this.onCreateTask} />
+        <TaskPage tasks={this.props.tasks} onCreateTask={this.onCreateTask} onChangeStatus={this.onChangeStatus}/>
       </div>
     );
   }

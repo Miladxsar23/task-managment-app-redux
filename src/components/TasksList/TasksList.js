@@ -2,9 +2,9 @@ import * as React from "react";
 import "./TasksList.scss";
 import Task from "../Task/Task";
 const TasksList = (props) => {
-  const { filteredTasks, title } = props;
+  const { filteredTasks, title, onChangeStatus } = props;
   const rows = filteredTasks.map((task) => {
-    return <Task key={task.id} task={task} />;
+    return <Task key={task.id} task={task} onChangeStatus={onChangeStatus}/>;
   });
   return (
     <div className="tasks col-sm-12 col-md-3">

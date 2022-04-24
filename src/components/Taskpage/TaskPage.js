@@ -33,8 +33,6 @@ class TaskPage extends Component {
   handleSubmit = (evt) => {
     evt.preventDefault();
     const { fields } = this.state;
-    fields.status = "Unstarted";
-    fields.id = uuidv4();
     this.props.onCreateTask(fields);
     this.handleResetForm();
   };
@@ -105,7 +103,12 @@ class TaskPage extends Component {
     return TASK_STATUS.map((status) => {
       const filteredTask = tasks.filter((task) => task.status === status);
       return (
-        <TasksList key={uuidv4()} filteredTasks={filteredTask} title={status} />
+        <TasksList
+          key={uuidv4()}
+          filteredTasks={filteredTask}
+          title={status}
+          onChangeStatus={this.props.onChangeStatus}
+        />
       );
     });
   };
