@@ -28,7 +28,7 @@ export default function tasks(state = { tasks: mockTasks }, action) {
     case "CHANGE_STATUS":
       const newTasks = state.tasks.map((task) => {
         if (task.id === action.payLoad.id) {
-          task.status = action.payLoad.newStatus
+          return Object.assign({}, task, action.payLoad.params);
         }
         return task;
       });

@@ -11,10 +11,10 @@ function createTask({ title, description }) {
     },
   };
 }
-function changeStatus({ id, newStatus }) {
+function changeStatus(id, params={}) {
   return {
     type: "CHANGE_STATUS",
-    payLoad: { id, newStatus },
+    payLoad: { id, params },
   };
 }
 
