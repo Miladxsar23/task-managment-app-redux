@@ -4,10 +4,11 @@ import "bootstrap/scss/bootstrap.scss";
 import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { createStore } from "redux";
+import {createStore } from "redux";
+import { devToolsEnhancer } from "@redux-devtools/extension";
 import { Provider } from "react-redux";
 import tasks from "./reducers";
-const store = createStore(tasks);
+const store = createStore(tasks, devToolsEnhancer());
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,7 +18,6 @@ root.render(
     </Provider>
   </React.StrictMode>
 );
-
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
