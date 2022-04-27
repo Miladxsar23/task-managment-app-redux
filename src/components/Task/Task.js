@@ -20,7 +20,7 @@ const Task = (props) => {
           <select
             className="form-select form-select-sm"
             aria-label="Default select example"
-            defaultValue={task.status}
+            value={task.status}
             onChange={(evt) => {
               const newStatus =
                 evt.target.options[evt.target.selectedIndex].value;

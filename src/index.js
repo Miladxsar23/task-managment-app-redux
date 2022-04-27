@@ -4,11 +4,22 @@ import "bootstrap/scss/bootstrap.scss";
 import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import {createStore } from "redux";
+import { createStore } from "redux";
 import { devToolsEnhancer } from "@redux-devtools/extension";
 import { Provider } from "react-redux";
 import tasks from "./reducers";
-const store = createStore(tasks, devToolsEnhancer());
+
+function configrationStore() {
+  const store = createStore(tasks, devToolsEnhancer());
+  // development mode -> enable hot reload reducers
+  if (module.hot) {
+    module.hot.accept("./reducers/index", () => {
+      store.replaceReducer(require("./reducers/index").default);
+    });
+  }
+  return store;
+}
+const store = configrationStore();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
