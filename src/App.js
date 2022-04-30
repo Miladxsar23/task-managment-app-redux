@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import TaskPage from "./components/Taskpage/TaskPage";
 import { connect } from "react-redux";
-import { createTask, changeStatus } from "./actions";
+import { createTask, changeStatus, fetchTasks } from "./actions";
 class App extends Component {
   onCreateTask = ({ title, description }) => {
     this.props.dispatch(createTask({ title, description }));
@@ -9,6 +9,9 @@ class App extends Component {
   onChangeStatus = (id, params) => {
     this.props.dispatch(changeStatus(id, params));
   };
+  componentDidMount() {
+    this.props.dispatch(fetchTasks());
+  }
   render() {
     return (
       <div className="App p-4">

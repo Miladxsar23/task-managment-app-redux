@@ -4,13 +4,14 @@ import "bootstrap/scss/bootstrap.scss";
 import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { createStore } from "redux";
-import { devToolsEnhancer } from "@redux-devtools/extension";
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import { composeWithDevTools } from "@redux-devtools/extension";
 import { Provider } from "react-redux";
 import tasks from "./reducers";
 
 function configrationStore() {
-  const store = createStore(tasks, devToolsEnhancer());
+  const store = createStore(tasks, composeWithDevTools(applyMiddleware(thunk)));
   // development mode -> enable hot reload reducers
   if (module.hot) {
     module.hot.accept("./reducers/index", () => {
