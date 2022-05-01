@@ -14,6 +14,10 @@ export default function tasks(state = { tasks: [] }, action) {
       return Object.assign({}, state, {
         tasks: newTasks,
       });
+    case "FETCH_TASKS_SUCCEED":
+      return Object.assign({}, state, {
+        tasks: action.payLoad.tasks,
+      });
     default:
       return state;
   }
