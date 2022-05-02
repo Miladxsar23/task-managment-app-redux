@@ -11,4 +11,11 @@ function fetchTasks() {
   return client.get("/tasks");
 }
 
-export { fetchTasks };
+function createTask(params) {
+  return client.post("/tasks", params);
+}
+
+function changeStatus(id, params) {
+  return client.put(`/tasks/${id}`, params);
+}
+export { fetchTasks, createTask, changeStatus };
