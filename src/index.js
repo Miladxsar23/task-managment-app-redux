@@ -8,10 +8,15 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { Provider } from "react-redux";
-import tasks from "./reducers";
+import tasks from './reducers'
+function rootReducer(state = {}, action) {
+  return {
+    tasks : tasks(state.tasks, action)
+  }
+}
 
 function configrationStore() {
-  const store = createStore(tasks, composeWithDevTools(applyMiddleware(thunk)));
+  const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
   // development mode -> enable hot reload reducers
   if (module.hot) {
     module.hot.accept("./reducers/index", () => {
@@ -21,7 +26,6 @@ function configrationStore() {
   return store;
 }
 const store = configrationStore();
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

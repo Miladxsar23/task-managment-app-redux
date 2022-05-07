@@ -4,7 +4,7 @@
       "id": 1,
       "title": "Learn Redux",
       "description": "The store, actions, and reducers, oh my!",
-      "status": "In Progress"
+      "status": "Completed"
     },
     {
       "id": 2,
@@ -35,6 +35,12 @@
       "description": "update",
       "status": "Completed",
       "id": 6
+    },
+    {
+      "title": "",
+      "description": "",
+      "status": "In Progress",
+      "id": 7
     }
   ]
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TasksList from "../TasksList/TasksList";
+import "./TaskPage.scss";
 import { v4 as uuidv4 } from "uuid";
 const TASK_STATUS = ["Unstarted", "In Progress", "Completed"];
 class TaskPage extends Component {
@@ -113,14 +114,23 @@ class TaskPage extends Component {
     });
   };
   render() {
-    return (
-      <div className="container">
-        <div className="row">
-          {this.renderTaskLists()}
-          {this.state.showForm ? this.renderTaskForm() : this.renderAddButton()}
+    if (this.props.isLoading) {
+      return (
+        <div className="loading">
+          <span className="loading-indicator"></span>
         </div>
-      </div>
-    );
+      );
+    }
+    else {
+      return (
+        <div className="container">
+          <div className="row">
+            {this.renderTaskLists()}
+            {this.state.showForm ? this.renderTaskForm() : this.renderAddButton()}
+          </div>
+        </div>
+      );
+    }
   }
 }
 export default TaskPage;
