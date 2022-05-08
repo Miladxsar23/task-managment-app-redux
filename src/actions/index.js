@@ -24,11 +24,14 @@ function changeStatusSucceed(task) {
 }
 function changeStatus(id, params = {}) {
   return (dispatch, getState) => {
+    dispatch(fetchTasksStarted());
     let task = getTaskById(getState().tasks.tasks, id);
     let updatedTask = Object.assign({}, task, params);
-    api.changeStatus(id, updatedTask).then((resp) => {
-      dispatch(changeStatusSucceed(resp.data));
-    });
+    setTimeout(() => {
+      api.changeStatus(id, updatedTask).then((resp) => {
+        dispatch(changeStatusSucceed(resp.data));
+      });
+    }, 500);
   };
 }
 function getTaskById(tasks, id) {
@@ -50,7 +53,7 @@ function fetchTasks() {
           dispatch(fetchTasksSucceed(resp.data));
         }, 2000);
       })
-      .catch(failure => dispatch(fetchTasksFailed(failure.message)));
+      .catch((failure) => dispatch(fetchTasksFailed(failure.message)));
   };
 }
 function fetchTasksStarted() {

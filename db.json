@@ -4,13 +4,13 @@
       "id": 1,
       "title": "Learn Redux",
       "description": "The store, actions, and reducers, oh my!",
-      "status": "Completed"
+      "status": "Unstarted"
     },
     {
       "id": 2,
       "title": "Peace on Earth",
       "description": "No big deal.",
-      "status": "Unstarted"
+      "status": "Completed"
     },
     {
       "id": 3,
@@ -33,14 +33,20 @@
     {
       "title": "update",
       "description": "update",
-      "status": "Completed",
+      "status": "Unstarted",
       "id": 6
     },
     {
       "title": "",
       "description": "",
-      "status": "In Progress",
+      "status": "Completed",
       "id": 7
+    },
+    {
+      "title": "asd",
+      "description": "asd",
+      "status": "Unstarted",
+      "id": 8
     }
   ]
 }

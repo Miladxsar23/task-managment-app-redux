@@ -124,7 +124,7 @@ class TaskPage extends Component {
     else {
       return (
         <div className="container">
-          <div className="row">
+          <div className="row p-4">
             {this.renderTaskLists()}
             {this.state.showForm ? this.renderTaskForm() : this.renderAddButton()}
           </div>
