@@ -10,6 +10,7 @@ import { composeWithDevTools } from "@redux-devtools/extension";
 import { Provider } from "react-redux";
 import tasks from './reducers'
 import logger from "./middleware/logger";
+import analytics from "./middleware/analytics";
 function rootReducer(state = {}, action) {
   return {
     tasks : tasks(state.tasks, action)
@@ -17,7 +18,7 @@ function rootReducer(state = {}, action) {
 }
 
 function configrationStore() {
-  const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, logger)));
+  const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, logger, analytics)));
   // development mode -> enable hot reload reducers
   if (module.hot) {
     module.hot.accept("./reducers/index", () => {

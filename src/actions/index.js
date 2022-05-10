@@ -3,6 +3,14 @@ function createTaskSucceed(task) {
   return {
     type: "CREATE_TASK_SUCCEED",
     payLoad: { task },
+    meta: {
+      analytics: {
+        event: "create_task",
+        data: {
+          id: task.id,
+        },
+      },
+    },
   };
 }
 function createTask({ title, description, status = "Unstarted" }) {
