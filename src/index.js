@@ -8,17 +8,23 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { Provider } from "react-redux";
-import tasks from './reducers'
+import tasks from "./reducers";
 import logger from "./middleware/logger";
 import analytics from "./middleware/analytics";
+import apiMiddleware from "./middleware/api";
 function rootReducer(state = {}, action) {
   return {
-    tasks : tasks(state.tasks, action)
-  }
+    tasks: tasks(state.tasks, action),
+  };
 }
 
 function configrationStore() {
-  const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, logger, analytics)));
+  const store = createStore(
+    rootReducer,
+    composeWithDevTools(
+      applyMiddleware(thunk, apiMiddleware, logger, analytics)
+    )
+  );
   // development mode -> enable hot reload reducers
   if (module.hot) {
     module.hot.accept("./reducers/index", () => {

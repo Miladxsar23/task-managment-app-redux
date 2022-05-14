@@ -1,7 +1,7 @@
 const initialState = {
   tasks: [],
   isLoading: false,
-  error : ''
+  error: "",
 };
 export default function tasks(state = initialState, action) {
   switch (action.type) {

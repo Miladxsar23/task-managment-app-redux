@@ -1,4 +1,8 @@
 import * as api from "../api";
+import { CALL_API } from "../middleware/api";
+export const FETCH_TASKS_STARTED = "FETCH_TASKS_STARTED";
+export const FETCH_TASKS_SUCCEED = "FETCH_TASKS_SUCCEED";
+export const FETCH_TASKS_FAILED = "FETCH_TASKS_FAILED";
 function createTaskSucceed(task) {
   return {
     type: "CREATE_TASK_SUCCEED",
@@ -15,7 +19,6 @@ function createTaskSucceed(task) {
 }
 function createTask({ title, description, status = "Unstarted" }) {
   return (dispatch) => {
-    dispatch(fetchTasksStarted());
     setTimeout(() => {
       api.createTask({ title, description, status }).then((resp) => {
         dispatch(createTaskSucceed(resp.data));
@@ -32,7 +35,6 @@ function changeStatusSucceed(task) {
 }
 function changeStatus(id, params = {}) {
   return (dispatch, getState) => {
-    dispatch(fetchTasksStarted());
     let task = getTaskById(getState().tasks.tasks, id);
     let updatedTask = Object.assign({}, task, params);
     setTimeout(() => {
@@ -45,37 +47,32 @@ function changeStatus(id, params = {}) {
 function getTaskById(tasks, id) {
   return tasks.find((task) => task.id === id);
 }
-function fetchTasksSucceed(tasks) {
-  return {
-    type: "FETCH_TASKS_SUCCEED",
-    payLoad: { tasks },
-  };
-}
+// function fetchTasksSucceed(tasks) {
+//   return {
+//     type: "FETCH_TASKS_SUCCEED",
+//     payLoad: { tasks },
+//   };
+// }
 function fetchTasks() {
-  return (dispatch) => {
-    dispatch(fetchTasksStarted());
-    api
-      .fetchTasks()
-      .then((resp) => {
-        setTimeout(() => {
-          dispatch(fetchTasksSucceed(resp.data));
-        }, 2000);
-      })
-      .catch((failure) => dispatch(fetchTasksFailed(failure.message)));
-  };
-}
-function fetchTasksStarted() {
   return {
-    type: "FETCH_TASKS_STARTED",
-  };
-}
-
-function fetchTasksFailed(error) {
-  return {
-    type: "FETCH_TASKS_FAILED",
-    payLoad: {
-      error,
+    [CALL_API]: {
+      types: ["FETCH_TASKS_STARTED", "FETCH_TASKS_SUCCEED", "FETCH_TASKS_FAILED"],
+      endpiont: "/tasks",
     },
   };
 }
+// function fetchTasksStarted() {
+//   return {
+//     type: "FETCH_TASKS_STARTED",
+//   };
+// }
+
+// function fetchTasksFailed(error) {
+//   return {
+//     type: "FETCH_TASKS_FAILED",
+//     payLoad: {
+//       error,
+//     },
+//   };
+// }
 export { createTask, changeStatus, fetchTasks };
