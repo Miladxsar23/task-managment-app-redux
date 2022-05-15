@@ -1,12 +1,6 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "title": "Learn Redux",
-      "description": "The store, actions, and reducers, oh my!",
-      "status": "Unstarted"
-    },
-    {
       "id": 2,
       "title": "Peace on Earth",
       "description": "No big deal.",
@@ -27,19 +21,19 @@
     {
       "title": "asdasd",
       "description": "asdasd",
-      "status": "Unstarted",
+      "status": "In Progress",
       "id": 5
     },
     {
       "title": "update",
       "description": "update",
-      "status": "Unstarted",
+      "status": "In Progress",
       "id": 6
     },
     {
       "title": "",
       "description": "",
-      "status": "Completed",
+      "status": "Unstarted",
       "id": 7
     },
     {
@@ -51,7 +45,7 @@
     {
       "title": "pishbord",
       "description": "alirafie.com",
-      "status": "Completed",
+      "status": "Unstarted",
       "id": 9
     },
     {

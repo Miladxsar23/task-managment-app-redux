@@ -8,6 +8,8 @@ class App extends Component {
     this.props.dispatch(createTask({ title, description }));
   };
   onChangeStatus = (id, params) => {
+    const task = this.props.tasks.find(t => t.id === id)
+    params = {...task, ...params}
     this.props.dispatch(changeStatus(id, params));
   };
   componentDidMount() {
