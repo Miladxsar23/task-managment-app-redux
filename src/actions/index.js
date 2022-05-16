@@ -1,84 +1,79 @@
-import { CALL_API } from "../middleware/api";
-export const FETCH_TASKS_STARTED = "FETCH_TASKS_STARTED";
-export const FETCH_TASKS_SUCCEED = "FETCH_TASKS_SUCCEED";
-export const FETCH_TASKS_FAILED = "FETCH_TASKS_FAILED";
-// function createTaskSucceed(task) {
-//   return {
-//     type: "CREATE_TASK_SUCCEED",
-//     payLoad: { task },
-//     meta: {
-//       analytics: {
-//         event: "create_task",
-//         data: {
-//           id: task.id,
-//         },
-//       },
-//     },
-//   };
-// }
+import * as api from "../api";
+function createTaskSucceed(task) {
+  return {
+    type: "CREATE_TASK_SUCCEED",
+    payLoad: { task },
+    meta: {
+      analytics: {
+        event: "create_task",
+        data: {
+          id: task.id,
+        },
+      },
+    },
+  };
+}
 function createTask({ title, description, status = "Unstarted" }) {
-  return {
-    [CALL_API]: {
-      types: ["REQUEST_STARTED", "CREATE_TASK_SUCCEED", "REQUEST_FAILED"],
-      endpoint: "/tasks",
-      method: "POST",
-      body: { title, description, status },
-    },
+  return (dispatch) => {
+    dispatch(requestStarted());
+    api
+      .createTask({ title, description, status })
+      .then((resp) => {
+        dispatch(createTaskSucceed(resp.data));
+      })
+      .catch((error) => {
+        dispatch(requestFailed(error));
+      });
   };
 }
 
-// function changeStatusSucceed(task) {
-//   return {
-//     type: "CHANGE_STATUS_SUCCEED",
-//     payLoad: { task },
-//   };
-// }
+function changeStatusSucceed(task) {
+  return {
+    type: "CHANGE_STATUS_SUCCEED",
+    payLoad: { task },
+  };
+}
 function changeStatus(id, params = {}) {
-  return {
-    [CALL_API]: {
-      types: ["REQUEST_STARTED", "CHANGE_STATUS_SUCCEED", "REQUEST_FAILED"],
-      endpoint: `/tasks/${id}`,
-      method: "PUT",
-      body: params,
-    },
+  return (dispatch, getState) => {
+    dispatch(requestStarted());
+    const task = getState().tasks.tasks.find((t) => t.id === id);
+    const newTask = Object.assign({}, task, params);
+    api
+      .changeStatus(id, newTask)
+      .then((resp) => {
+        dispatch(changeStatusSucceed(resp.data));
+      })
+      .catch((error) => {
+        dispatch(requestFailed(error));
+      });
   };
 }
-// function fetchTasksSucceed(tasks) {
-//   return {
-//     type: "FETCH_TASKS_SUCCEED",
-//     payLoad: { tasks },
-//   };
-// }
+function fetchTasksSucceed(tasks) {
+  return {
+    type: "FETCH_TASKS_SUCCEED",
+    payLoad: { tasks },
+  };
+}
 function fetchTasks() {
+  return (dispatch) => {
+    dispatch(requestStarted());
+    api.fetchTasks().then((resp) => {
+      dispatch(fetchTasksSucceed(resp.data));
+    });
+  };
+}
+function requestStarted() {
   return {
-    [CALL_API]: {
-      types: ["REQUEST_STARTED", "FETCH_TASKS_SUCCEED", "REQUEST_FAILED"],
-      endpoint: "/tasks",
-      method: "GET",
+    type: "REQUEST_STARTED",
+  };
+}
+
+function requestFailed(error) {
+  return {
+    type: "REQUEST_FAILED",
+    payLoad: {
+      error,
     },
   };
 }
-function deleteTask(id) {
-  return {
-    [CALL_API] : {
-      types: ["REQUEST_STARTED", "DELETE_TASK_SUCCEED", "REQUEST_FAILED"],
-      endpoint: `/tasks/${id}`,
-      method: "DELETE",
-    }
-  }
-}
-// function fetchTasksStarted() {
-//   return {
-//     type: "FETCH_TASKS_STARTED",
-//   };
-// }
-
-// function fetchTasksFailed(error) {
-//   return {
-//     type: "FETCH_TASKS_FAILED",
-//     payLoad: {
-//       error,
-//     },
-//   };
-// }
-export { createTask, changeStatus, fetchTasks, deleteTask };
+export { createTask, changeStatus, fetchTasks };

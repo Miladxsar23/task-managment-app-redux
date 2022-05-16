@@ -22,7 +22,7 @@ function configrationStore() {
   const store = createStore(
     rootReducer,
     composeWithDevTools(
-      applyMiddleware(thunk, apiMiddleware, logger, analytics)
+      applyMiddleware(thunk, logger, analytics)
     )
   );
   // development mode -> enable hot reload reducers

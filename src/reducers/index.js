@@ -8,13 +8,13 @@ export default function tasks(state = initialState, action) {
     case "CREATE_TASK_SUCCEED":
       return {
         ...state,
-        tasks: [...state.tasks, action.payLoad],
+        tasks: [...state.tasks, action.payLoad.task],
         isLoading: false,
       };
     case "CHANGE_STATUS_SUCCEED":
       const newTasks = state.tasks.map((task) => {
-        if (task.id === action.payLoad.id) {
-          return action.payLoad;
+        if (task.id === action.payLoad.task.id) {
+          return action.payLoad.task;
         }
         return task;
       });
@@ -26,7 +26,7 @@ export default function tasks(state = initialState, action) {
     case "FETCH_TASKS_SUCCEED":
       return {
         ...state,
-        tasks: action.payLoad,
+        tasks: action.payLoad.tasks,
         isLoading: false,
       };
     case "DELETE_TASK_SUCCEED":
@@ -43,7 +43,7 @@ export default function tasks(state = initialState, action) {
       return {
         ...state,
         isLoading: false,
-        error: action.payLoad.error,
+        error: action.payLoad.error.message,
       };
     default:
       return state;
