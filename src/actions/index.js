@@ -48,19 +48,27 @@ function changeStatus(id, params = {}) {
       });
   };
 }
-function fetchTasksSucceed(tasks) {
+function fetchTasksStarted() {
   return {
-    type: "FETCH_TASKS_SUCCEED",
-    payLoad: { tasks },
+    type: "FETCH_TASKS_STARTED",
   };
 }
+// function fetchTasksSucceed(tasks) {
+//   return {
+//     type: "FETCH_TASKS_SUCCEED",
+//     payLoad: { tasks },
+//   };
+// }
+// function fetchTasks() {
+//   return (dispatch) => {
+//     dispatch(requestStarted());
+//     api.fetchTasks().then((resp) => {
+//       dispatch(fetchTasksSucceed(resp.data));
+//     });
+//   };
+// }
 function fetchTasks() {
-  return (dispatch) => {
-    dispatch(requestStarted());
-    api.fetchTasks().then((resp) => {
-      dispatch(fetchTasksSucceed(resp.data));
-    });
-  };
+  return fetchTasksStarted()
 }
 function requestStarted() {
   return {

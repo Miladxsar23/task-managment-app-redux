@@ -10,12 +10,12 @@
       "id": 3,
       "title": "Create Facebook for dogs",
       "description": "The hottest new social network",
-      "status": "Completed"
+      "status": "In Progress"
     },
     {
       "title": "yek kare mohem",
       "description": "salam in yek test ast",
-      "status": "In Progress",
+      "status": "Unstarted",
       "id": 4
     },
     {
@@ -33,25 +33,25 @@
     {
       "title": "",
       "description": "",
-      "status": "Unstarted",
+      "status": "In Progress",
       "id": 7
     },
     {
       "title": "asd",
       "description": "asd",
-      "status": "Completed",
+      "status": "In Progress",
       "id": 8
     },
     {
       "title": "pishbord",
       "description": "alirafie.com",
-      "status": "Completed",
+      "status": "Unstarted",
       "id": 9
     },
     {
       "title": "seo ahan madan",
       "description": "kharide reportaj",
-      "status": "Unstarted",
+      "status": "Completed",
       "id": 10
     },
     {
