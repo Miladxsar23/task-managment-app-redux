@@ -1,4 +1,4 @@
-import { fork, put, call, takeLatest } from "redux-saga/effects";
+import {  put, call, takeLatest } from "redux-saga/effects";
 import * as api from "./api";
 function* rootSaga() {
   yield takeLatest("FETCH_TASKS_STARTED", fetchTasks);
