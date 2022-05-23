@@ -1,8 +1,11 @@
-import {  put, call, takeLatest } from "redux-saga/effects";
+import { put, call, takeLatest } from "redux-saga/effects";
 import * as api from "./api";
+//generate watchers
 function* rootSaga() {
+  //define watcher
   yield takeLatest("FETCH_TASKS_STARTED", fetchTasks);
 }
+//watcher is subProgram.They are executed when an particular action of the dispatched
 function* fetchTasks() {
   try {
     yield put({
