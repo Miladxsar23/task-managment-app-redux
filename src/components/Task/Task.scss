@@ -1,3 +1,10 @@
-.task-body {
+.task {
+  &-header {
+  }
+  &-body {
     line-break: anywhere;
+  }
+  &-footer {
+    float: right;
+  }
 }
