@@ -13,11 +13,11 @@ function createTaskSucceed(task) {
     },
   };
 }
-function createTask({ title, description, status = "Unstarted" }) {
+function createTask({ title, description, status = "Unstarted", timer = 0 }) {
   return (dispatch) => {
     dispatch(requestStarted());
     api
-      .createTask({ title, description, status })
+      .createTask({ title, description, status, timer })
       .then((resp) => {
         dispatch(createTaskSucceed(resp.data));
       })
@@ -42,6 +42,9 @@ function changeStatus(id, params = {}) {
       .changeStatus(id, newTask)
       .then((resp) => {
         dispatch(changeStatusSucceed(resp.data));
+        if (resp.data.status === "In Progress") {
+          dispatch(timerStart(resp.data.id));
+        }
       })
       .catch((error) => {
         dispatch(requestFailed(error));
@@ -68,7 +71,7 @@ function fetchTasksStarted() {
 //   };
 // }
 function fetchTasks() {
-  return fetchTasksStarted()
+  return fetchTasksStarted();
 }
 function requestStarted() {
   return {
@@ -82,6 +85,13 @@ function requestFailed(error) {
     payLoad: {
       error,
     },
+  };
+}
+
+function timerStart(taskId) {
+  return {
+    type: "TIMER_STARTED",
+    payLoad: { taskId },
   };
 }
 export { createTask, changeStatus, fetchTasks };

@@ -45,6 +45,14 @@ export default function tasks(state = initialState, action) {
         isLoading: false,
         error: action.payLoad.error.message,
       };
+    case "TIMER_INCREAMENT":
+      const tasks = state.tasks.map((t) => {
+        if (t.id === action.payLoad.taskId) {
+          return { ...t, timer: ++t.timer };
+        }
+        return t;
+      });
+      return { ...state, tasks: tasks };
     default:
       return state;
   }
