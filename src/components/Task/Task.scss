@@ -12,14 +12,5 @@
   }
   &-footer {
     @include flex(row, nowrap, end, center);
-    & > small {
-      padding: 6px 10px;
-      text-align: center;
-      color: white;
-      background-color: #0b1637;
-      border-radius: 24px;
-      font-weight: 400;
-      font-size: 12px;
-    }
   }
 }

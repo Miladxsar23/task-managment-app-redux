@@ -108,7 +108,7 @@ class TaskPage extends Component {
           key={uuidv4()}
           filteredTasks={filteredTask}
           title={status}
-          onChangeStatus={this.props.onChangeStatus}
+          onEditTask={this.props.onEditTask}
         />
       );
     });

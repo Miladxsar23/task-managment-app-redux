@@ -1,6 +1,7 @@
 import * as React from "react";
 import { v4 as uuid } from "uuid";
 import './Task.scss'
+import Timer from "../Timer/Timer";
 const TASK_STATUS = ["Unstarted", "In Progress", "Completed"];
 const Task = (props) => {
   const { task } = props;
@@ -25,7 +26,7 @@ const Task = (props) => {
             onChange={(evt) => {
               const newStatus =
                 evt.target.options[evt.target.selectedIndex].value;
-              props.onChangeStatus(task.id, { status: newStatus });
+              props.onEditTask(task.id, { status: newStatus });
             }}
           >
             {options}
@@ -35,7 +36,7 @@ const Task = (props) => {
       <hr />
       <div className="task-body">{task.description}</div>
       <div className="task-footer">
-        <small>{task.timer}s</small>
+        <Timer time={task.timer}/>
       </div>
     </div>
   );

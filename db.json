@@ -4,20 +4,20 @@
       "id": 2,
       "title": "Peace on Earth",
       "description": "No big deal.",
-      "status": "Completed",
-      "timer": 0
+      "status": "Unstarted",
+      "timer": 19
     },
     {
       "id": 3,
       "title": "Create Facebook for dogs",
       "description": "The hottest new social network",
       "status": "In Progress",
-      "timer": 0
+      "timer": 3
     },
     {
       "title": "yek kare mohem",
       "description": "salam in yek test ast",
-      "status": "Unstarted",
+      "status": "In Progress",
       "id": 4,
       "timer": 0
     },
@@ -26,47 +26,47 @@
       "description": "asdasd",
       "status": "Unstarted",
       "id": 5,
-      "timer": 0
+      "timer": 34
     },
     {
       "title": "update",
       "description": "update",
-      "status": "In Progress",
+      "status": "Completed",
       "id": 6,
       "timer": 0
     },
     {
       "title": "",
       "description": "",
-      "status": "In Progress",
+      "status": "Unstarted",
       "id": 7,
-      "timer": 0
+      "timer": 17
     },
     {
       "title": "asd",
       "description": "asd",
-      "status": "In Progress",
+      "status": "Completed",
       "id": 8,
       "timer": 0
     },
     {
       "title": "pishbord",
       "description": "alirafie.com",
-      "status": "Completed",
+      "status": "Unstarted",
       "id": 9,
-      "timer": 32
+      "timer": 48
     },
     {
       "title": "seo ahan madan",
       "description": "kharide reportaj",
-      "status": "Completed",
+      "status": "In Progress",
       "id": 10,
       "timer": 0
     },
     {
       "title": "delta-p",
       "description": "sabte sherkat",
-      "status": "Unstarted",
+      "status": "Completed",
       "id": 11,
       "timer": 0
     },
@@ -74,7 +74,7 @@
       "title": "create server script",
       "description": "hellow wolrd",
       "status": "Unstarted",
-      "timer": 0,
+      "timer": 99,
       "id": 12
     }
   ]

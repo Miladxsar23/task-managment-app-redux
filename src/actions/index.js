@@ -27,13 +27,13 @@ function createTask({ title, description, status = "Unstarted", timer = 0 }) {
   };
 }
 
-function changeStatusSucceed(task) {
+function editTaskSucceed(task) {
   return {
     type: "CHANGE_STATUS_SUCCEED",
     payLoad: { task },
   };
 }
-function changeStatus(id, params = {}) {
+function editTask(id, params = {}) {
   return (dispatch, getState) => {
     dispatch(requestStarted());
     const task = getState().tasks.tasks.find((t) => t.id === id);
@@ -41,9 +41,12 @@ function changeStatus(id, params = {}) {
     api
       .changeStatus(id, newTask)
       .then((resp) => {
-        dispatch(changeStatusSucceed(resp.data));
+        dispatch(editTaskSucceed(resp.data));
         if (resp.data.status === "In Progress") {
-          dispatch(timerStart(resp.data.id));
+          return dispatch(progressTimerStart(resp.data.id));
+        } 
+        if(task.status === "In Progress") {
+          return dispatch(progressTimerStop(resp.data.id))
         }
       })
       .catch((error) => {
@@ -88,10 +91,16 @@ function requestFailed(error) {
   };
 }
 
-function timerStart(taskId) {
+function progressTimerStart(taskId) {
   return {
     type: "TIMER_STARTED",
     payLoad: { taskId },
   };
 }
-export { createTask, changeStatus, fetchTasks };
+function progressTimerStop(taskId) {
+  return {
+    type: "TIMER_STOPPED",
+    payLoad: { taskId },
+  };
+}
+export { createTask, editTask, fetchTasks };

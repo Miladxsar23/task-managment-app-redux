@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAGG,AAAD,gBAAM,CAAC;EACL,UAAU,EAAE,KAAK;CAClB",
+    "sources": [
+        "TasksList.scss"
+    ],
+    "names": [],
+    "file": "TasksList.css"
+}

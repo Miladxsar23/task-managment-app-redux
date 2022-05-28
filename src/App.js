@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import TaskPage from "./components/Taskpage/TaskPage";
 import { connect } from "react-redux";
-import { createTask, changeStatus, fetchTasks } from "./actions";
+import { createTask, editTask, fetchTasks } from "./actions";
 import FlashMessage from "./components/FlashMessage/FlashMessage";
 class App extends Component {
   onCreateTask = ({ title, description }) => {
     this.props.dispatch(createTask({ title, description }));
   };
-  onChangeStatus = (id, params) => {
+  onEditTask = (id, params) => {
     const task = this.props.tasks.find(t => t.id === id)
     params = {...task, ...params}
-    this.props.dispatch(changeStatus(id, params));
+    this.props.dispatch(editTask(id, params));
   };
   componentDidMount() {
     this.props.dispatch(fetchTasks());
@@ -23,7 +23,7 @@ class App extends Component {
           className="p-4"
           tasks={this.props.tasks}
           onCreateTask={this.onCreateTask}
-          onChangeStatus={this.onChangeStatus}
+          onEditTask={this.onEditTask}
           isLoading={this.props.isLoading}
         />
       </div>
