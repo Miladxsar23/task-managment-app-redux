@@ -5,7 +5,7 @@
       "title": "Peace on Earth",
       "description": "No big deal.",
       "status": "Unstarted",
-      "timer": 19
+      "timer": 149
     },
     {
       "id": 3,
@@ -38,9 +38,9 @@
     {
       "title": "",
       "description": "",
-      "status": "Unstarted",
+      "status": "In Progress",
       "id": 7,
-      "timer": 17
+      "timer": 40
     },
     {
       "title": "asd",
@@ -54,7 +54,7 @@
       "description": "alirafie.com",
       "status": "Unstarted",
       "id": 9,
-      "timer": 48
+      "timer": 120
     },
     {
       "title": "seo ahan madan",

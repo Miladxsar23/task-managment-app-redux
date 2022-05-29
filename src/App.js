@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import TaskPage from "./components/Taskpage/TaskPage";
-import { connect } from "react-redux";
+import React, { Component, useEffect } from "react";
+import TaskPage from "./components/Taskpage/TaskPage2";
+import { connect, useSelector, useDispatch } from "react-redux";
 import { createTask, editTask, fetchTasks } from "./actions";
 import FlashMessage from "./components/FlashMessage/FlashMessage";
 class App extends Component {
@@ -8,8 +8,8 @@ class App extends Component {
     this.props.dispatch(createTask({ title, description }));
   };
   onEditTask = (id, params) => {
-    const task = this.props.tasks.find(t => t.id === id)
-    params = {...task, ...params}
+    const task = this.props.tasks.find((t) => t.id === id);
+    params = { ...task, ...params };
     this.props.dispatch(editTask(id, params));
   };
   componentDidMount() {
@@ -38,4 +38,36 @@ function mapStateToProps(state) {
     error,
   };
 }
-export default connect(mapStateToProps)(App);
+
+const App2 = (props) => {
+  const tasks = useSelector((state) => state.tasks);
+  const dispatch = useDispatch();
+  function onCreate({ title, description }) {
+    dispatch(createTask({ title, description }));
+  }
+  function onEditTask(id, params) {
+    const task = tasks.tasks.find((t) => t.id === id);
+    params = { ...task, ...params };
+    dispatch(editTask(id, params));
+  }
+  useEffect(() => {
+    if (tasks.tasks.length === 0) {
+      dispatch(fetchTasks());
+    }
+  }, []);
+  console.log(tasks);
+  return (
+    <div className="App">
+      {tasks.error && <FlashMessage message={tasks.error} />}
+      <TaskPage
+        className="p-4"
+        tasks={tasks.tasks}
+        onCreateTask={onCreate}
+        onEditTask={onEditTask}
+        isLoading={tasks.isLoading}
+      />
+    </div>
+  );
+};
+// export default connect(mapStateToProps)(App);
+export default App2;

@@ -2,9 +2,11 @@ import * as React from "react";
 import { v4 as uuid } from "uuid";
 import './Task.scss'
 import Timer from "../Timer/Timer";
+import {useSelector} from 'react-redux'
 const TASK_STATUS = ["Unstarted", "In Progress", "Completed"];
 const Task = (props) => {
   const { task } = props;
+  const taskMain = useSelector(state => state.tasks.tasks.find(t => t.id === task.id))
   const options = TASK_STATUS.map((status) => {
     return (
       <option key={uuid()} value={status}>
@@ -36,7 +38,7 @@ const Task = (props) => {
       <hr />
       <div className="task-body">{task.description}</div>
       <div className="task-footer">
-        <Timer time={task.timer}/>
+        <Timer time={taskMain.timer}/>
       </div>
     </div>
   );
