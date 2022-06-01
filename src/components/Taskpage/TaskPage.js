@@ -58,6 +58,9 @@ class TaskPage extends Component {
       </div>
     );
   };
+  onSearch = (evt) => {
+    console.log(evt.target.value);
+  };
   renderTaskForm = () => {
     return (
       <div className="col-sm-12 col-md-3">
@@ -106,7 +109,7 @@ class TaskPage extends Component {
         <TasksList
           key={uuidv4()}
           title={status}
-          filteredTasks={tasks.filter(t => t.status === status)}
+          filteredTasks={tasks.filter((t) => t.status === status)}
           onEditTask={this.props.onEditTask}
         />
       );
@@ -119,13 +122,24 @@ class TaskPage extends Component {
           <span className="loading-indicator"></span>
         </div>
       );
-    }
-    else {
+    } else {
       return (
         <div className="container">
+          <div className="d-flex justify-content-center p-4">
+            <div className="col-md-6 col-sm-12">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search..."
+                onChange={this.onSearch}
+              />
+            </div>
+          </div>
           <div className="row p-4">
             {this.renderTaskLists()}
-            {this.state.showForm ? this.renderTaskForm() : this.renderAddButton()}
+            {this.state.showForm
+              ? this.renderTaskForm()
+              : this.renderAddButton()}
           </div>
         </div>
       );
