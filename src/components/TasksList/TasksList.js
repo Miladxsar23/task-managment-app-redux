@@ -1,12 +1,10 @@
 import * as React from "react";
 import "./TasksList.scss";
-import Task from "../Task/Task";
-import { useSelector } from "react-redux";
+import Task from "../Task/Task2";
 const TasksList = (props) => {
-  const {title, onEditTask } = props;
-  const filteredTasks = useSelector(state => state.tasks.tasks.filter(t => t.status === title))
+  const { title, onEditTask, filteredTasks } = props;
   const rows = filteredTasks.map((task) => {
-    return <Task key={task.id} task={task} onEditTask={onEditTask}/>;
+    return <Task key={task.id} task={task} onEditTask={onEditTask} />;
   });
   return (
     <div className="tasks col-sm-12 col-md-3">

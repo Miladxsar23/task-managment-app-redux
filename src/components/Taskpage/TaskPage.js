@@ -106,6 +106,7 @@ class TaskPage extends Component {
         <TasksList
           key={uuidv4()}
           title={status}
+          filteredTasks={tasks.filter(t => t.status === status)}
           onEditTask={this.props.onEditTask}
         />
       );
