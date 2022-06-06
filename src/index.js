@@ -13,7 +13,6 @@ import { Provider } from "react-redux";
 import tasks from "./reducers";
 import logger from "./middleware/logger";
 import analytics from "./middleware/analytics";
-import apiMiddleware from "./middleware/api";
 function rootReducer(state = {}, action) {
   return {
     tasks: tasks(state.tasks, action),

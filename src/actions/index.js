@@ -44,9 +44,9 @@ function editTask(id, params = {}) {
         dispatch(editTaskSucceed(resp.data));
         if (resp.data.status === "In Progress") {
           return dispatch(progressTimerStart(resp.data.id));
-        } 
-        if(task.status === "In Progress") {
-          return dispatch(progressTimerStop(resp.data.id))
+        }
+        if (task.status === "In Progress") {
+          return dispatch(progressTimerStop(resp.data.id));
         }
       })
       .catch((error) => {
@@ -103,4 +103,11 @@ function progressTimerStop(taskId) {
     payLoad: { taskId },
   };
 }
-export { createTask, editTask, fetchTasks };
+
+function filterTasks(searchTerm) {
+  return {
+    type: "FILTER_TASKS",
+    payLoad: { searchTerm },
+  };
+}
+export { createTask, editTask, fetchTasks, filterTasks };

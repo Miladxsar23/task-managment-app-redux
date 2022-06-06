@@ -2,6 +2,7 @@ const initialState = {
   tasks: [],
   isLoading: false,
   error: "",
+  searchTerm: "",
 };
 export default function tasks(state = initialState, action) {
   switch (action.type) {
@@ -53,7 +54,19 @@ export default function tasks(state = initialState, action) {
         return t;
       });
       return { ...state, tasks: tasks };
+    case "FILTER_TASKS":
+      return {
+        ...state,
+        searchTerm: action.payLoad.searchTerm,
+      };
     default:
       return state;
   }
+}
+
+/* Selectors function for this reducer */
+export function getFilteredTasks(tasks, searchTerm) {
+  return tasks.filter((task) => {
+    return task.title.match(new RegExp(searchTerm), "i");
+  });
 }

@@ -45,6 +45,9 @@ class TaskPage extends Component {
   handleCancel = () => {
     this.toggleForm();
   };
+  onSearch = (evt) => {
+    this.props.onSearch(evt.target.value);
+  };
   renderAddButton = () => {
     return (
       <div className="col-sm-12 col-md-3">
@@ -58,9 +61,7 @@ class TaskPage extends Component {
       </div>
     );
   };
-  onSearch = (evt) => {
-    console.log(evt.target.value);
-  };
+
   renderTaskForm = () => {
     return (
       <div className="col-sm-12 col-md-3">

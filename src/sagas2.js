@@ -3,7 +3,6 @@ import {
   call,
   put,
   delay,
-  takeEvery,
   take,
 } from "@redux-saga/core/effects";
 import { channel } from "redux-saga";
