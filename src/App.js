@@ -3,13 +3,14 @@ import TaskPage from "./components/Taskpage/TaskPage";
 import { connect, useSelector, useDispatch } from "react-redux";
 import { createTask, editTask, fetchTasks, filterTasks } from "./actions";
 import FlashMessage from "./components/FlashMessage/FlashMessage";
-import {getFilteredTasks} from './reducers'
+import { getFilteredSpliteTasks } from "./reducers";
 class App extends Component {
   onCreateTask = ({ title, description }) => {
     this.props.dispatch(createTask({ title, description }));
   };
-  onEditTask = (id, params) => {
-    const task = this.props.tasks.find((t) => t.id === id);
+  onEditTask = (id, status, params) => {
+    const tasksByStatus = this.props.tasks[status];
+    const task = tasksByStatus.find((t) => t.id === id);
     params = { ...task, ...params };
     this.props.dispatch(editTask(id, params));
   };
@@ -36,9 +37,9 @@ class App extends Component {
   }
 }
 function mapStateToProps(state) {
-  const { searchTerm, isLoading, error, tasks } = state.tasks;
+  const { isLoading, error } = state.tasks;
   return {
-    tasks : getFilteredTasks(tasks, searchTerm),
+    tasks: getFilteredSpliteTasks(state),
     isLoading,
     error,
   };

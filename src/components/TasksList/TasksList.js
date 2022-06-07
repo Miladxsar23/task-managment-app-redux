@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./TasksList.scss";
-import Task from "../Task/Task2";
+import Task from "../Task/Task";
 const TasksList = (props) => {
   const { title, onEditTask, filteredTasks } = props;
   const rows = filteredTasks.map((task) => {

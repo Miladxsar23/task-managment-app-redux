@@ -1,3 +1,4 @@
+import { createSelector } from "reselect";
 const initialState = {
   tasks: [],
   isLoading: false,
@@ -65,8 +66,22 @@ export default function tasks(state = initialState, action) {
 }
 
 /* Selectors function for this reducer */
-export function getFilteredTasks(tasks, searchTerm) {
-  return tasks.filter((task) => {
-    return task.title.match(new RegExp(searchTerm), "i");
-  });
-}
+const getTasks = (state) => state.tasks.tasks;
+const getSearchTerm = (state) => state.tasks.searchTerm;
+
+export const getFilteredTasks = createSelector(
+  [getTasks, getSearchTerm],
+  (tasks, searchTerm) => {
+    return tasks.filter((task) => {
+      return task.title.match(new RegExp(searchTerm), "i");
+    });
+  }
+);
+export const getFilteredSpliteTasks = createSelector([getFilteredTasks], (tasks) => {
+  return {
+    'Unstarted' : tasks.filter(task => task.status === "Unstarted"), 
+    'In Progress' : tasks.filter(task => task.status === "In Progress"),
+    'Completed' : tasks.filter(task => task.status === "Completed"),
+  }
+})
+ 
