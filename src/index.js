@@ -7,7 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import createSagaMiddleware from "redux-saga";
-import rootSaga from "./sagas2";
+import rootSaga from "./sagas";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { Provider } from "react-redux";
 import tasks from "./reducers";

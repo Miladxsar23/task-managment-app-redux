@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import TasksList from "../TasksList/TasksList";
 import "./TaskPage.scss";
 import { v4 as uuidv4 } from "uuid";
-const TASK_STATUS = ["Unstarted", "In Progress", "Completed"];
 class TaskPage extends Component {
   state = {
     showForm: false,

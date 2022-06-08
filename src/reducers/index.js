@@ -1,4 +1,6 @@
+import { result } from "lodash";
 import { createSelector } from "reselect";
+import { TASK_STATUS } from "../constants";
 const initialState = {
   tasks: [],
   isLoading: false,
@@ -77,11 +79,13 @@ export const getFilteredTasks = createSelector(
     });
   }
 );
-export const getFilteredSpliteTasks = createSelector([getFilteredTasks], (tasks) => {
-  return {
-    'Unstarted' : tasks.filter(task => task.status === "Unstarted"), 
-    'In Progress' : tasks.filter(task => task.status === "In Progress"),
-    'Completed' : tasks.filter(task => task.status === "Completed"),
+export const getFilteredSpliteTasks = createSelector(
+  [getFilteredTasks],
+  (tasks) => {
+    const groupTasks = {}
+    TASK_STATUS.map((status) => {
+      groupTasks[status] = tasks.filter((t) => t.status === status);
+    });
+    return groupTasks;
   }
-})
- 
+);
