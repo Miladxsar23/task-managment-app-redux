@@ -22,7 +22,6 @@ function makeCall(endpoint, method = "GET", body) {
 const apiMiddleware = (store) => (next) => (action) => {
   const callApi = action[CALL_API];
   if (typeof callApi === "undefined") return next(action);
-  console.log(callApi);
   const [requestStartedType, successType, failureRype] = callApi.types;
   next({ type: requestStartedType });
   makeCall(callApi.endpoint, callApi.method, callApi.body)
