@@ -1,42 +1,81 @@
 {
   "tasks": [
     {
-      "projects": [
-        {
-          "id": 1,
-          "name": "Short-Term Goals"
-        },
-        {
-          "id": 2,
-          "name": "Long-Term Goals"
-        }
-      ],
-      "tasks": [
-        {
-          "id": 1,
-          "title": "Learn Redux",
-          "description": "The store, actions, and reducers, oh my!",
-          "status": "Unstarted",
-          "timer": 86,
-          "projectId": 1
-        },
-        {
-          "id": 2,
-          "title": "Peace on Earth",
-          "description": "No big deal.",
-          "status": "Unstarted",
-          "timer": 132,
-          "projectId": 2
-        },
-        {
-          "id": 3,
-          "title": "Create Facebook for dogs",
-          "description": "The hottest new social network",
-          "status": "Completed",
-          "timer": 332,
-          "projectId": 1
-        }
-      ]
+      "id": 2,
+      "title": "Peace on Earth",
+      "description": "No big deal.",
+      "status": "Unstarted",
+      "timer": 236
+    },
+    {
+      "id": 3,
+      "title": "Create Facebook for dogs",
+      "description": "The hottest new social network",
+      "status": "In Progress",
+      "timer": 3
+    },
+    {
+      "title": "yek kare mohem",
+      "description": "salam in yek test ast",
+      "status": "In Progress",
+      "id": 4,
+      "timer": 0
+    },
+    {
+      "title": "asdasd",
+      "description": "asdasd",
+      "status": "Unstarted",
+      "id": 5,
+      "timer": 220
+    },
+    {
+      "title": "update",
+      "description": "update",
+      "status": "Completed",
+      "id": 6,
+      "timer": 0
+    },
+    {
+      "title": "",
+      "description": "",
+      "status": "In Progress",
+      "id": 7,
+      "timer": 40
+    },
+    {
+      "title": "asd",
+      "description": "asd",
+      "status": "Completed",
+      "id": 8,
+      "timer": 0
+    },
+    {
+      "title": "pishbord",
+      "description": "alirafie.com",
+      "status": "Unstarted",
+      "id": 9,
+      "timer": 156
+    },
+    {
+      "title": "seo ahan madan",
+      "description": "kharide reportaj",
+      "status": "In Progress",
+      "id": 10,
+      "timer": 0
+    },
+    {
+      "title": "delta-p",
+      "description": "sabte sherkat",
+      "status": "Completed",
+      "id": 11,
+      "timer": 0
+    },
+    {
+      "title": "create server script",
+      "description": "hellow wolrd",
+      "status": "Unstarted",
+      "timer": 99,
+      "id": 12
     }
   ]
 }

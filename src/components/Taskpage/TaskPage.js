@@ -108,7 +108,7 @@ class TaskPage extends Component {
       const taskByStatus = tasks[status];
       return (
         <TasksList
-          key={uuidv4()}
+          key={status}
           title={status}
           filteredTasks={taskByStatus}
           onEditTask={this.props.onEditTask}
