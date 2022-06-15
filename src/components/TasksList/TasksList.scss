@@ -1,5 +1,9 @@
 .tasks-list {
-  &-tltle {
+  &-title {
+    &>h4{
+      color: #5465ff !important;
+      font-weight: 900;
+    }
   }
   &-item {
     min-height: 100vh;

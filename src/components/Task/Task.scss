@@ -5,7 +5,11 @@
   align-items: $align;
 }
 .task {
+  background-color: #EFF7FF;
   &-header {
+    &-title {
+      color : #788bff;
+    }
   }
   &-body {
     line-break: anywhere;

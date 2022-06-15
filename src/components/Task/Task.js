@@ -13,7 +13,7 @@ const Task = (props) => {
     );
   });
   return (
-    <div className="task w-100 d-flex flex-column bg-light p-3 my-2 rounded">
+    <div className="task w-100 d-flex flex-column p-3 my-2 rounded">
       <div className="task-header d-flex flex-row justify-content-between align-items-center">
         <div className="task-header-title text-primary">
           <strong>{task.title}</strong>
