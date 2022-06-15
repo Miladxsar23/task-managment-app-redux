@@ -105,7 +105,7 @@ class TaskPage extends Component {
       const filteredTask = tasks.filter((task) => task.status === status);
       return (
         <TasksList
-          key={uuidv4()}
+          key={status}
           filteredTasks={filteredTask}
           title={status}
           onChangeStatus={this.props.onChangeStatus}
@@ -120,13 +120,14 @@ class TaskPage extends Component {
           <span className="loading-indicator"></span>
         </div>
       );
-    }
-    else {
+    } else {
       return (
         <div className="container">
           <div className="row p-4">
             {this.renderTaskLists()}
-            {this.state.showForm ? this.renderTaskForm() : this.renderAddButton()}
+            {this.state.showForm
+              ? this.renderTaskForm()
+              : this.renderAddButton()}
           </div>
         </div>
       );
