@@ -4,15 +4,15 @@
       "id": 2,
       "title": "Peace on Earth",
       "description": "No big deal.",
-      "status": "Completed",
-      "timer": 0
+      "status": "Unstarted",
+      "timer": 273
     },
     {
       "id": 3,
       "title": "Create Facebook for dogs",
       "description": "The hottest new social network",
-      "status": "Completed",
-      "timer": 0
+      "status": "Unstarted",
+      "timer": 3
     },
     {
       "title": "yek kare mohem",
@@ -24,23 +24,23 @@
     {
       "title": "asdasd",
       "description": "asdasd",
-      "status": "In Progress",
+      "status": "Unstarted",
       "id": 5,
-      "timer": 0
+      "timer": 220
     },
     {
       "title": "update",
       "description": "update",
-      "status": "In Progress",
+      "status": "Completed",
       "id": 6,
       "timer": 0
     },
     {
       "title": "",
       "description": "",
-      "status": "Completed",
+      "status": "In Progress",
       "id": 7,
-      "timer": 0
+      "timer": 40
     },
     {
       "title": "asd",
@@ -54,26 +54,27 @@
       "description": "alirafie.com",
       "status": "Unstarted",
       "id": 9,
-      "timer": 0
+      "timer": 156
     },
     {
       "title": "seo ahan madan",
       "description": "kharide reportaj",
-      "status": "Completed",
+      "status": "In Progress",
       "id": 10,
       "timer": 0
     },
     {
       "title": "delta-p",
       "description": "sabte sherkat",
-      "status": "Unstarted",
+      "status": "Completed",
       "id": 11,
       "timer": 0
     },
     {
-      "title": "server.js",
-      "description": "hellow world`",
+      "title": "create server script",
+      "description": "hellow wolrd",
       "status": "Unstarted",
+      "timer": 99,
       "id": 12
     }
   ]
