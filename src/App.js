@@ -1,7 +1,7 @@
-import React, { Component, useEffect } from "react";
+import React, { Component } from "react";
 import TaskPage from "./components/Taskpage/TaskPage";
-import { connect, useSelector, useDispatch } from "react-redux";
-import { createTask, editTask, fetchTasks, filterTasks } from "./actions";
+import { connect } from "react-redux";
+import { createTask, editTask, fetchProjects, filterTasks } from "./actions";
 import FlashMessage from "./components/FlashMessage/FlashMessage";
 import { getFilteredSpliteTasks } from "./reducers";
 class App extends Component {
@@ -18,12 +18,13 @@ class App extends Component {
     this.props.dispatch(filterTasks(searchterm));
   };
   componentDidMount() {
-    this.props.dispatch(fetchTasks());
+    this.props.dispatch(fetchProjects());
   }
   render() {
     return (
       <div className="App">
         {this.props.error && <FlashMessage message={this.props.error} />}
+
         <TaskPage
           className="p-4"
           tasks={this.props.tasks}

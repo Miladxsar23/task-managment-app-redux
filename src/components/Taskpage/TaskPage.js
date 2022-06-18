@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import TasksList from "../TasksList/TasksList";
 import "./TaskPage.scss";
-import { v4 as uuidv4 } from "uuid";
 class TaskPage extends Component {
   state = {
     showForm: false,
