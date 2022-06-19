@@ -1,9 +1,16 @@
 import React, { Component } from "react";
 import TaskPage from "./components/Taskpage/TaskPage";
+import Header from "./components/Header/Header";
 import { connect } from "react-redux";
-import { createTask, editTask, fetchProjects, filterTasks } from "./actions";
+import {
+  createTask,
+  editTask,
+  fetchProjects,
+  filterTasks,
+  setCurrentProjectId,
+} from "./actions";
 import FlashMessage from "./components/FlashMessage/FlashMessage";
-import { getFilteredSpliteTasks } from "./reducers";
+import { getGroupAndFilteredTasks } from "./reducers";
 class App extends Component {
   onCreateTask = ({ title, description }) => {
     this.props.dispatch(createTask({ title, description }));
@@ -17,6 +24,9 @@ class App extends Component {
   onSearch = (searchterm) => {
     this.props.dispatch(filterTasks(searchterm));
   };
+  onChangeCurrentProject = (evt) => {
+    this.props.dispatch(setCurrentProjectId(Number(evt.target.value)));
+  };
   componentDidMount() {
     this.props.dispatch(fetchProjects());
   }
@@ -24,6 +34,10 @@ class App extends Component {
     return (
       <div className="App">
         {this.props.error && <FlashMessage message={this.props.error} />}
+        <Header
+          projects={this.props.projects}
+          onChangeCurrentProject={this.onChangeCurrentProject}
+        />
 
         <TaskPage
           className="p-4"
@@ -38,9 +52,10 @@ class App extends Component {
   }
 }
 function mapStateToProps(state) {
-  const { isLoading, error } = state.tasks;
+  const { error, isLoading, items } = state.projects;
   return {
-    tasks: getFilteredSpliteTasks(state),
+    tasks: getGroupAndFilteredTasks(state),
+    projects: items,
     isLoading,
     error,
   };

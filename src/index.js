@@ -10,25 +10,27 @@ import createSagaMiddleware from "redux-saga";
 import rootSaga from "./sagas";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { Provider } from "react-redux";
-import tasks from "./reducers";
+import projects from "./reducers";
+import page from "./reducers/page";
 import logger from "./middleware/logger";
 import analytics from "./middleware/analytics";
 function rootReducer(state = {}, action) {
   return {
-    tasks: tasks(state.tasks, action),
+    projects: projects(state.projects, action),
+    page: page(state.page, action),
   };
 }
 
 function configrationStore() {
   const sagaMiddleware = createSagaMiddleware();
-  console.log(sagaMiddleware)
+  console.log(sagaMiddleware);
   const store = createStore(
     rootReducer,
     composeWithDevTools(
       applyMiddleware(thunk, sagaMiddleware, logger, analytics)
     )
   );
-  sagaMiddleware.run(rootSaga)
+  sagaMiddleware.run(rootSaga);
   // development mode -> enable hot reload reducers
   if (module.hot) {
     module.hot.accept("./reducers/index", () => {

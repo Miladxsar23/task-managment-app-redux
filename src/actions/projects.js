@@ -14,7 +14,7 @@ function fetchProjects() {
 }
 function fetchProjectsSucceed(projects) {
   return {
-    type: "PROJECTS_FETCH_SUCCEED",
+    type: "FETCH_PROJECTS_SUCCEED",
     payLoad: { projects: projects },
   };
 }

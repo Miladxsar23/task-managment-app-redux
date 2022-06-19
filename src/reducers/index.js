@@ -1,13 +1,30 @@
 import { createSelector } from "reselect";
 import { TASK_STATUS } from "../constants";
+import {
+  getTaskSearchTerm as getSearchTerm,
+  getCurrentProjectId,
+} from "./page";
+/* initial state for projects tree node */
 const initialState = {
-  tasks: [],
+  items: [],
   isLoading: false,
   error: "",
-  searchTerm: "",
 };
-export default function tasks(state = initialState, action) {
+/* projects reducer */
+export default function projects(state = initialState, action) {
   switch (action.type) {
+    case "FETCH_PROJECTS_STARTED":
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case "FETCH_PROJECTS_SUCCEED":
+      const { projects } = action.payLoad;
+      return {
+        ...state,
+        items: projects,
+        isLoading: false,
+      };
     case "CREATE_TASK_SUCCEED":
       return {
         ...state,
@@ -67,21 +84,33 @@ export default function tasks(state = initialState, action) {
 }
 
 /* Selectors function for this reducer */
-const getTasks = (state) => state.tasks.tasks;
-const getSearchTerm = (state) => state.tasks.searchTerm;
+
+//input selector
+const getProjects = (state) => state.projects;
+//memoizing selector
+const getTaskByProjectId = createSelector(
+  [getProjects, getCurrentProjectId],
+  (projects, currentProjectId) => {
+    if (!currentProjectId) return [];
+    else {
+      const project = projects.items.find((p) => p.id === currentProjectId);
+      return project.tasks;
+    }
+  }
+);
 
 export const getFilteredTasks = createSelector(
-  [getTasks, getSearchTerm],
+  [getTaskByProjectId, getSearchTerm],
   (tasks, searchTerm) => {
     return tasks.filter((task) => {
       return task.title.match(new RegExp(searchTerm), "i");
     });
   }
 );
-export const getFilteredSpliteTasks = createSelector(
+export const getGroupAndFilteredTasks = createSelector(
   [getFilteredTasks],
   (tasks) => {
-    const groupTasks = {}
+    const groupTasks = {};
     TASK_STATUS.map((status) => {
       groupTasks[status] = tasks.filter((t) => t.status === status);
     });
