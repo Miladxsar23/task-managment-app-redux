@@ -13,11 +13,17 @@ function createTaskSucceed(task) {
     },
   };
 }
-function createTask({ title, description, status = "Unstarted", timer = 0 }) {
+function createTask({
+  title,
+  description,
+  status = "Unstarted",
+  timer = 0,
+  projectId,
+}) {
   return (dispatch) => {
     dispatch(requestStarted());
     api
-      .createTask({ title, description, status, timer })
+      .createTask({ title, description, status, timer, projectId })
       .then((resp) => {
         dispatch(createTaskSucceed(resp.data));
       })

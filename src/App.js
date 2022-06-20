@@ -13,7 +13,10 @@ import FlashMessage from "./components/FlashMessage/FlashMessage";
 import { getGroupAndFilteredTasks } from "./reducers";
 class App extends Component {
   onCreateTask = ({ title, description }) => {
-    this.props.dispatch(createTask({ title, description }));
+    const { currentProjectId } = this.props;
+    this.props.dispatch(
+      createTask({ title, description, projectId: currentProjectId })
+    );
   };
   onEditTask = (id, status, params) => {
     const tasksByStatus = this.props.tasks[status];
@@ -38,26 +41,27 @@ class App extends Component {
           projects={this.props.projects}
           onChangeCurrentProject={this.onChangeCurrentProject}
         />
-
-        <TaskPage
+        {this.props.currentProjectId ? <TaskPage
           className="p-4"
           tasks={this.props.tasks}
           onCreateTask={this.onCreateTask}
           onEditTask={this.onEditTask}
           onSearch={this.onSearch}
           isLoading={this.props.isLoading}
-        />
+        /> : <p className="text-center">please select a project</p>}
       </div>
     );
   }
 }
 function mapStateToProps(state) {
   const { error, isLoading, items } = state.projects;
+  const { currentProjectId } = state.page;
   return {
     tasks: getGroupAndFilteredTasks(state),
     projects: items,
     isLoading,
     error,
+    currentProjectId,
   };
 }
 
