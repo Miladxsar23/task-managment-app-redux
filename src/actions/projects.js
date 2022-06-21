@@ -1,21 +1,25 @@
 import * as api from "../api";
+import { normalize } from "normalizr";
+import receiveEntities from "./receive-entities";
+import { projectSchema } from "../schema";
+import { setCurrentProjectId } from "./page";
 function fetchProjects() {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch(fetchProjectStarted());
     api
       .fetchProjects()
       .then((resp) => {
-        dispatch(fetchProjectsSucceed(resp.data));
+        const normalizedData = normalize(resp.data, [projectSchema]);
+        dispatch(receiveEntities(normalizedData));
+        console.log(normalizedData)
+        if (!getState().page.currentProjectId) {
+          const defaultProjectId = resp.data[0].id;
+          dispatch(setCurrentProjectId(defaultProjectId));
+        }
       })
       .catch((err) => {
         dispatch(fetchProjectsFailed(err));
       });
-  };
-}
-function fetchProjectsSucceed(projects) {
-  return {
-    type: "FETCH_PROJECTS_SUCCEED",
-    payLoad: { projects: projects },
   };
 }
 function fetchProjectStarted(boards) {
