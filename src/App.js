@@ -10,7 +10,7 @@ import {
   setCurrentProjectId,
 } from "./actions";
 import FlashMessage from "./components/FlashMessage/FlashMessage";
-import { getGroupAndFilteredTasks } from "./reducers";
+import { getGroupAndFilteredTasks, getProjects } from "./reducers/projects";
 class App extends Component {
   onCreateTask = ({ title, description }) => {
     const { currentProjectId } = this.props;
@@ -31,6 +31,7 @@ class App extends Component {
     this.props.dispatch(setCurrentProjectId(Number(evt.target.value)));
   };
   componentDidMount() {
+    console.log(this.props.tasks)
     this.props.dispatch(fetchProjects());
   }
   render() {
@@ -41,56 +42,31 @@ class App extends Component {
           projects={this.props.projects}
           onChangeCurrentProject={this.onChangeCurrentProject}
         />
-        {this.props.currentProjectId ? <TaskPage
-          className="p-4"
-          tasks={this.props.tasks}
-          onCreateTask={this.onCreateTask}
-          onEditTask={this.onEditTask}
-          onSearch={this.onSearch}
-          isLoading={this.props.isLoading}
-        /> : <p className="text-center">please select a project</p>}
+        {this.props.tasks ? (
+          <TaskPage
+            className="p-4"
+            tasks={this.props.tasks}
+            onCreateTask={this.onCreateTask}
+            onEditTask={this.onEditTask}
+            onSearch={this.onSearch}
+            isLoading={this.props.isLoading}
+          />
+        ) : (
+          <p className="text-center">please select a project</p>
+        )}
       </div>
     );
   }
 }
 function mapStateToProps(state) {
-  const { error, isLoading, items } = state.projects;
-  const { currentProjectId } = state.page;
+  const { error, isLoading } = state.projects;
+  console.log(isLoading)
   return {
     tasks: getGroupAndFilteredTasks(state),
-    projects: items,
+    projects: getProjects(state),
     isLoading,
     error,
-    currentProjectId,
   };
 }
 
-// const App2 = (props) => {
-//   const tasks = useSelector((state) => state.tasks);
-//   const dispatch = useDispatch();
-//   function onCreate({ title, description }) {
-//     dispatch(createTask({ title, description }));
-//   }
-//   function onEditTask(id, params) {
-//     const task = tasks.tasks.find((t) => t.id === id);
-//     params = { ...task, ...params };
-//     dispatch(editTask(id, params));
-//   }
-//   useEffect(() => {
-//     if (tasks.tasks.length === 0) {
-//       dispatch(fetchTasks());
-//     }
-//   }, []);
-//   return (
-//     <div className="App">
-//       {tasks.error && <FlashMessage message={tasks.error} />}
-//       <TaskPage
-//         className="p-4"
-//         onCreateTask={onCreate}
-//         onEditTask={onEditTask}
-//       />
-//     </div>
-//   );
-// };
 export default connect(mapStateToProps)(App);
-// export default App2;

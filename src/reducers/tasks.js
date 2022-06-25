@@ -6,7 +6,7 @@ const initialState = {
 function tasks(state = initialState, action) {
   switch (action.type) {
     case "RECEIVE_ENTITIES": {
-      const entities = action.payLoad;
+      const {entities} = action.payLoad;
       if (entities && entities.tasks) {
         return {
           ...state,
@@ -26,10 +26,11 @@ function tasks(state = initialState, action) {
       });
       return {
         ...state,
-        items: nextTasks,
+        tasks: nextTasks,
       };
     }
     default:
       return state;
   }
 }
+export default tasks;

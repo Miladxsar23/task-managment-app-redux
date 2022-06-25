@@ -10,13 +10,13 @@ import createSagaMiddleware from "redux-saga";
 import rootSaga from "./sagas";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { Provider } from "react-redux";
-import projects from "./reducers";
-import page from "./reducers/page";
+import { projects, tasks, page } from "./reducers";
 import logger from "./middleware/logger";
 import analytics from "./middleware/analytics";
 function rootReducer(state = {}, action) {
   return {
     projects: projects(state.projects, action),
+    tasks: tasks(state.tasks, action),
     page: page(state.page, action),
   };
 }

@@ -11,7 +11,6 @@ function fetchProjects() {
       .then((resp) => {
         const normalizedData = normalize(resp.data, [projectSchema]);
         dispatch(receiveEntities(normalizedData));
-        console.log(normalizedData)
         if (!getState().page.currentProjectId) {
           const defaultProjectId = resp.data[0].id;
           dispatch(setCurrentProjectId(defaultProjectId));
