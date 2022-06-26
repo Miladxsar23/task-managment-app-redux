@@ -1,3 +1,20 @@
-.task-body {
+@mixin flex($type, $wrap, $justify, $align) {
+  display: flex;
+  flex-flow: $type $wrap;
+  justify-content: $justify;
+  align-items: $align;
+}
+.task {
+  background-color: #EFF7FF;
+  &-header {
+    &-title {
+      color : #788bff;
+    }
+  }
+  &-body {
     line-break: anywhere;
+  }
+  &-footer {
+    @include flex(row, nowrap, end, center);
+  }
 }

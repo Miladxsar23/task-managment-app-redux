@@ -6,25 +6,31 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
+import createSagaMiddleware from "redux-saga";
+import rootSaga from "./sagas";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { Provider } from "react-redux";
-import tasks from "./reducers";
+import { projects, tasks, page } from "./reducers";
 import logger from "./middleware/logger";
 import analytics from "./middleware/analytics";
-import apiMiddleware from "./middleware/api";
 function rootReducer(state = {}, action) {
   return {
+    projects: projects(state.projects, action),
     tasks: tasks(state.tasks, action),
+    page: page(state.page, action),
   };
 }
 
 function configrationStore() {
+  const sagaMiddleware = createSagaMiddleware();
+  console.log(sagaMiddleware);
   const store = createStore(
     rootReducer,
     composeWithDevTools(
-      applyMiddleware(thunk, apiMiddleware, logger, analytics)
+      applyMiddleware(thunk, sagaMiddleware, logger, analytics)
     )
   );
+  sagaMiddleware.run(rootSaga);
   // development mode -> enable hot reload reducers
   if (module.hot) {
     module.hot.accept("./reducers/index", () => {

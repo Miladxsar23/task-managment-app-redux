@@ -1,7 +1,7 @@
 import axios from "axios";
 export const CALL_API = "CALL_API";
-const API_BASE_URL = "http://localhost:3002";
-const headers = { "Content-Type": "application/json" , "Accept":"application/json"};
+const API_BASE_URL = "http://localhost:3001";
+const headers = { "Content-Type": "application/json" };
 function makeCall(endpoint, method = "GET", body) {
   const url = `${API_BASE_URL}${endpoint}`;
   const params = {
@@ -22,7 +22,7 @@ function makeCall(endpoint, method = "GET", body) {
 const apiMiddleware = (store) => (next) => (action) => {
   const callApi = action[CALL_API];
   if (typeof callApi === "undefined") return next(action);
-  const [requestStartedType, successType, failureType] = callApi.types;
+  const [requestStartedType, successType, failureRype] = callApi.types;
   next({ type: requestStartedType });
   makeCall(callApi.endpoint, callApi.method, callApi.body)
     .then((resp) => {
@@ -35,7 +35,7 @@ const apiMiddleware = (store) => (next) => (action) => {
     })
     .catch((error) => {
       next({
-        type: failureType,
+        type: failureRype,
         payLoad: { error },
       });
     });

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import TasksList from "../TasksList/TasksList";
 import "./TaskPage.scss";
-import { v4 as uuidv4 } from "uuid";
-const TASK_STATUS = ["Unstarted", "In Progress", "Completed"];
 class TaskPage extends Component {
   state = {
     showForm: false,
@@ -45,6 +43,9 @@ class TaskPage extends Component {
   handleCancel = () => {
     this.toggleForm();
   };
+  onSearch = (evt) => {
+    this.props.onSearch(evt.target.value);
+  };
   renderAddButton = () => {
     return (
       <div className="col-sm-12 col-md-3">
@@ -58,6 +59,7 @@ class TaskPage extends Component {
       </div>
     );
   };
+
   renderTaskForm = () => {
     return (
       <div className="col-sm-12 col-md-3">
@@ -101,14 +103,14 @@ class TaskPage extends Component {
   };
   renderTaskLists = () => {
     const tasks = this.props.tasks;
-    return TASK_STATUS.map((status) => {
-      const filteredTask = tasks.filter((task) => task.status === status);
+    return Object.keys(tasks).map((status) => {
+      const taskByStatus = tasks[status];
       return (
         <TasksList
           key={status}
-          filteredTasks={filteredTask}
           title={status}
-          onChangeStatus={this.props.onChangeStatus}
+          filteredTasks={taskByStatus}
+          onEditTask={this.props.onEditTask}
         />
       );
     });
@@ -123,6 +125,16 @@ class TaskPage extends Component {
     } else {
       return (
         <div className="container">
+          <div className="d-flex justify-content-center p-4">
+            <div className="col-md-6 col-sm-12">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search..."
+                onChange={this.onSearch}
+              />
+            </div>
+          </div>
           <div className="row p-4">
             {this.renderTaskLists()}
             {this.state.showForm

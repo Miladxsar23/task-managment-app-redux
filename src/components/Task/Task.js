@@ -1,6 +1,7 @@
 import * as React from "react";
 import { v4 as uuid } from "uuid";
 import './Task.scss'
+import Timer from "../Timer/Timer";
 const TASK_STATUS = ["Unstarted", "In Progress", "Completed"];
 const Task = (props) => {
   const { task } = props;
@@ -12,7 +13,7 @@ const Task = (props) => {
     );
   });
   return (
-    <div className="task w-100 d-flex flex-column bg-light p-3 my-2 rounded">
+    <div className="task w-100 d-flex flex-column p-3 my-2 rounded">
       <div className="task-header d-flex flex-row justify-content-between align-items-center">
         <div className="task-header-title text-primary">
           <strong>{task.title}</strong>
@@ -25,7 +26,7 @@ const Task = (props) => {
             onChange={(evt) => {
               const newStatus =
                 evt.target.options[evt.target.selectedIndex].value;
-              props.onChangeStatus(task.id, { status: newStatus });
+              props.onEditTask(task.id, { status: newStatus });
             }}
           >
             {options}
@@ -34,8 +35,11 @@ const Task = (props) => {
       </div>
       <hr />
       <div className="task-body">{task.description}</div>
+      <div className="task-footer">
+        <Timer time={task.timer}/>
+      </div>
     </div>
   );
 };
 
-export default Task;
+export default React.memo(Task);
