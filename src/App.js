@@ -18,10 +18,7 @@ class App extends Component {
       createTask({ title, description, projectId: currentProjectId })
     );
   };
-  onEditTask = (id, status, params) => {
-    const tasksByStatus = this.props.tasks[status];
-    const task = tasksByStatus.find((t) => t.id === id);
-    params = { ...task, ...params };
+  onEditTask = (id, params) => {
     this.props.dispatch(editTask(id, params));
   };
   onSearch = (searchterm) => {
@@ -60,12 +57,13 @@ class App extends Component {
 }
 function mapStateToProps(state) {
   const { error, isLoading } = state.projects;
-  console.log(isLoading)
+  const {currentProjectId} = state.page
   return {
     tasks: getGroupAndFilteredTasks(state),
     projects: getProjects(state),
     isLoading,
     error,
+    currentProjectId
   };
 }
 

@@ -26,7 +26,7 @@ const Task = (props) => {
             onChange={(evt) => {
               const newStatus =
                 evt.target.options[evt.target.selectedIndex].value;
-              props.onEditTask(task.id, task.status, { status: newStatus });
+              props.onEditTask(task.id, { status: newStatus });
             }}
           >
             {options}

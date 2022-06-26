@@ -11,15 +11,30 @@ function projects(state = initialState, action) {
     case "RECEIVE_ENTITIES": {
       const { entities } = action.payLoad;
       if (entities && entities.projects) {
-        console.log(state)
+        console.log(state);
         return {
           ...state,
           isLoading: false,
           items: entities.projects,
         };
       }
-      console.log(state)
       return state;
+    }
+    case "CREATE_TASK_SUCCEED": {
+      const { task } = action.payLoad;
+      const currentProjectId = task.projectId;
+      const currentProject = state.items[currentProjectId];
+      const newProject = {
+        ...currentProject,
+        tasks: [...currentProject.tasks, Number(task.id)],
+      };
+      return {
+        ...state,
+        items: {
+          ...state.items,
+          [currentProjectId]: newProject,
+        },
+      };
     }
     case "FETCH_PROJECTS_STARTED": {
       return {
@@ -62,9 +77,8 @@ const getTaskByProjectId = (state) => {
   if (!currentProjectId || !state.projects.items[currentProjectId]) {
     return [];
   }
-  const tasksId = state.projects.items[currentProjectId].tasks;
-  console.log(state.tasks)
-  return tasksId.map((id) => state.tasks.items[Number(id)]);
+  const tasksIds = state.projects.items[currentProjectId].tasks;
+  return tasksIds.map((id) => state.tasks.items[Number(id)]);
 };
 
 //memoizing selector

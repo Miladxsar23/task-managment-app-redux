@@ -42,8 +42,8 @@ function editTaskSucceed(task) {
 function editTask(id, params = {}) {
   return (dispatch, getState) => {
     dispatch(requestStarted());
-    const task = getState().tasks.tasks.find((t) => t.id === id);
-    const newTask = Object.assign({}, task, params);
+    const task = getState().tasks.items[id]
+    const newTask = {...task, ...params}
     api
       .changeStatus(id, newTask)
       .then((resp) => {

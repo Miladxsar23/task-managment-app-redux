@@ -5,8 +5,21 @@ const initialState = {
 };
 function tasks(state = initialState, action) {
   switch (action.type) {
+    case "REQUEST_STARTED": {
+      return {
+        ...state,
+        isLoadig: true,
+      };
+    }
+    case "REQUEST_FAILED": {
+      const { error } = action.payLoad;
+      return {
+        ...state,
+        error: error.message,
+      };
+    }
     case "RECEIVE_ENTITIES": {
-      const {entities} = action.payLoad;
+      const { entities } = action.payLoad;
       if (entities && entities.tasks) {
         return {
           ...state,
@@ -17,16 +30,40 @@ function tasks(state = initialState, action) {
       return state;
     }
     case "TIMER_INCREAMENT": {
-      const nextTasks = Object.keys(state.items).map((taskId) => {
-        const task = state.items[taskId];
-        if (taskId === action.payLoad.taskId) {
-          return { ...task, timer: task.timer + 1 };
-        }
-        return task;
-      });
+      const { taskId } = action.payLoad;
+      const task = state.items[taskId];
       return {
         ...state,
-        tasks: nextTasks,
+        items: {
+          ...state.items,
+          [taskId]: {
+            ...task,
+            timer: task.timer + 1,
+          },
+        },
+      };
+    }
+    case "CHANGE_STATUS_SUCCEED": {
+      const { task } = action.payLoad;
+      const taskId = task.id;
+      return {
+        ...state,
+        isLoadig: false,
+        items: {
+          ...state.items,
+          [taskId]: task,
+        },
+      };
+    }
+    case "CREATE_TASK_SUCCEED": {
+      const { task } = action.payLoad;
+      return {
+        ...state,
+        isLoadig: false,
+        items: {
+          ...state.items,
+          [task.id]: task,
+        },
       };
     }
     default:
