@@ -42,8 +42,8 @@ function editTaskSucceed(task) {
 function editTask(id, params = {}) {
   return (dispatch, getState) => {
     dispatch(requestStarted());
-    const task = getState().tasks.items[id]
-    const newTask = {...task, ...params}
+    const task = getState().tasks.items[id];
+    const newTask = { ...task, ...params };
     api
       .changeStatus(id, newTask)
       .then((resp) => {
@@ -116,4 +116,4 @@ function filterTasks(searchTerm) {
     payLoad: { searchTerm },
   };
 }
-export { createTask, editTask, fetchTasks, filterTasks };
+export { createTask, createTaskSucceed, editTask, fetchTasks, filterTasks };
