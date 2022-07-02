@@ -32,7 +32,7 @@ function* fetchTasks() {
 }
 
 //handleProgressTimer
-function* handleProgressTimer({ type, payLoad }) {
+export function* handleProgressTimer({ type, payLoad }) {
   if (type === "TIMER_STARTED") {
     while (true) {
       yield delay(1000);
