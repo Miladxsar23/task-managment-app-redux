@@ -60,11 +60,6 @@ function editTask(id, params = {}) {
       });
   };
 }
-function fetchTasksStarted() {
-  return {
-    type: "FETCH_TASKS_STARTED",
-  };
-}
 // function fetchTasksSucceed(tasks) {
 //   return {
 //     type: "FETCH_TASKS_SUCCEED",
@@ -80,7 +75,9 @@ function fetchTasksStarted() {
 //   };
 // }
 function fetchTasks() {
-  return fetchTasksStarted();
+  return {
+    type: "FETCH_TASKS_STARTED",
+  };
 }
 function requestStarted() {
   return {

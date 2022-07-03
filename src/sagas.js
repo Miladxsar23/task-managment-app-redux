@@ -12,16 +12,16 @@ function* rootSagas() {
   yield takeLatesById(["TIMER_STARTED", "TIMER_STOPPED"], handleProgressTimer);
 }
 
-function* fetchTasks() {
+export function* fetchTasks() {
   try {
     yield put({
       type: "REQUEST_STARTED",
     });
     yield delay(2000);
-    const { data } = yield call(api.fetchTasks);
+    const response = yield call(api.fetchTasks);
     yield put({
       type: "FETCH_TASKS_SUCCEED",
-      payLoad: { tasks: data },
+      payLoad: { tasks: response.data },
     });
   } catch (error) {
     yield put({

@@ -1,7 +1,28 @@
-import { put, delay } from "redux-saga/effects";
-import { handleProgressTimer } from "../sagas";
-
+import { put, delay, call } from "@redux-saga/core/effects";
+import { runSaga } from "redux-saga";
+import { handleProgressTimer, fetchTasks } from "../sagas";
+import * as api from "../api";
 describe("sagas", () => {
+  describe("fetchTask", () => {
+    test("fetchTask succeed path", async () => {
+      api.fetchTasks = jest.fn(() => Promise.resolve({ data: "foo" }));
+      const dummyTasks = { data: "foo" };
+      let dispatched = [];
+      const result = await runSaga(
+        {
+          dispatch: (action) => dispatched.push(action),
+        },
+        fetchTasks
+      );
+      expect(dispatched[0]).toEqual({ type: "REQUEST_STARTED" });
+      setTimeout(() => {
+        expect(dispatched[1]).toEqual({
+          type: "FETCH_TASKS_SUCCEED",
+          payLoad: { tasks: dummyTasks.data },
+        });
+      }, 2000);
+    });
+  });
   describe("handleProgressTimer", () => {
     it("handles the handleProgressTimer happy path", () => {
       const iterator = handleProgressTimer({
