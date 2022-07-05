@@ -1,12 +1,6 @@
-import analytics, { fakeAnalyticsApi } from "../../middleware/analytics";
-jest.mock("../../middleware/analytics", () => {
-  const orginalModules = jest.requireActual("../../middleware/analytics");
-  return {
-    __esModule: true,
-    ...orginalModules,
-    fakeAnalyticsApi: jest.fn().mockImplementation(() => Promise.resolve("success"))
-  };
-});
+import analytics from "../../middleware/analytics";
+import * as helpers from "../../helpers";
+jest.mock("../../helpers");
 const create = () => {
   const store = {
     getState: jest.fn(() => {}),
@@ -14,30 +8,35 @@ const create = () => {
   };
   const next = jest.fn();
   const invoke = (action) => analytics(store)(next)(action);
-  return { store, next, invoke };
+  return { invoke, store, next };
 };
-// suite test
+
 describe("analytics middleware", () => {
+  beforeEach(() => {
+    helpers.fakeAnalyticsApi.mockResolvedValue("success");
+  });
   test("should pass on irrelevant keys", () => {
-    const { next, invoke } = create();
-    const action = { type: "IRREVELANT" };
+    const action = {
+      type: "IRREVELANT",
+    };
+    const { invoke, next } = create();
     invoke(action);
     expect(next).toHaveBeenCalledWith(action);
-    expect(fakeAnalyticsApi).not.toHaveBeenCalled();
+    expect(helpers.fakeAnalyticsApi).not.toHaveBeenCalled();
   });
-  test("should make an analytics API call", () => {
-    const { next, invoke } = create();
+  test("should pass revelant keys", async () => {
     const action = {
       type: "REVELANT",
       meta: {
         analytics: {
-          event: "REVELANT",
+          event: "foo",
           data: { extra: "stuff" },
         },
       },
     };
+    const { invoke, next } = create();
     invoke(action);
-    expect(fakeAnalyticsApi).toHaveBeenCalled();
     expect(next).toHaveBeenCalledWith(action);
+    expect(helpers.fakeAnalyticsApi).toHaveBeenCalled();
   });
 });

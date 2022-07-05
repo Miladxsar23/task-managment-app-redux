@@ -1,8 +1,4 @@
-export function fakeAnalyticsApi(eventType, data) {
-  return new Promise((resolve, reject) => {
-    resolve("success!");
-  });
-}
+import { fakeAnalyticsApi } from "../helpers";
 const analytics = (store) => (next) => (action) => {
   if (!action || !action.meta || !action.meta.analytics) return next(action);
   const { event, data } = action.meta.analytics;
