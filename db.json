@@ -14,8 +14,8 @@
       "id": 1,
       "title": "Learn Redux",
       "description": "The store, actions, and reducers, oh my!",
-      "status": "Completed",
-      "timer": 86,
+      "status": "Unstarted",
+      "timer": 89,
       "projectId": 1,
       "params": {
         "status": "In Progress"

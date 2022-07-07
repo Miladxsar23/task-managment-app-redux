@@ -124,8 +124,8 @@ class TaskPage extends Component {
       );
     } else {
       return (
-        <div className="container">
-          <div className="d-flex justify-content-center p-4">
+        <div className="container border rounded bg-white">
+          <div className="d-flex justify-content-center p-4 mt-5">
             <div className="col-md-6 col-sm-12">
               <input
                 type="text"
