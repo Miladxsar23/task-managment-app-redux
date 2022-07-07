@@ -1,7 +1,7 @@
 import { put, delay, call } from "@redux-saga/core/effects";
 import { runSaga } from "redux-saga";
-import { handleProgressTimer, fetchTasks } from "../sagas";
-import * as api from "../api";
+import { handleProgressTimer, fetchTasks } from "../../sagas";
+import * as api from "../../api";
 describe("sagas", () => {
   describe("fetchTask", () => {
     // success path

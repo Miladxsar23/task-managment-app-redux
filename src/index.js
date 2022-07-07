@@ -23,7 +23,6 @@ function rootReducer(state = {}, action) {
 
 function configrationStore() {
   const sagaMiddleware = createSagaMiddleware();
-  console.log(sagaMiddleware);
   const store = createStore(
     rootReducer,
     composeWithDevTools(

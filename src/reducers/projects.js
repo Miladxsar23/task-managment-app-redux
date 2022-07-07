@@ -72,13 +72,13 @@ export const getProjects = (state) => {
     return project;
   });
 };
-const getTaskByProjectId = (state) => {
+export const getTaskByProjectId = (state) => {
   const { currentProjectId } = state.page;
   if (!currentProjectId || !state.projects.items[currentProjectId]) {
     return [];
   }
   const tasksIds = state.projects.items[currentProjectId].tasks;
-  return tasksIds.map((id) => state.tasks.items[Number(id)]);
+  return tasksIds.map((id) => state.tasks.items[id]);
 };
 
 //memoizing selector

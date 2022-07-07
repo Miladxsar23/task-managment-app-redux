@@ -8,7 +8,7 @@ function tasks(state = initialState, action) {
     case "REQUEST_STARTED": {
       return {
         ...state,
-        isLoadig: true,
+        isLoading: true,
       };
     }
     case "REQUEST_FAILED": {
@@ -48,7 +48,7 @@ function tasks(state = initialState, action) {
       const taskId = task.id;
       return {
         ...state,
-        isLoadig: false,
+        isLoading: false,
         items: {
           ...state.items,
           [taskId]: task,
@@ -59,7 +59,7 @@ function tasks(state = initialState, action) {
       const { task } = action.payLoad;
       return {
         ...state,
-        isLoadig: false,
+        isLoading: false,
         items: {
           ...state.items,
           [task.id]: task,
