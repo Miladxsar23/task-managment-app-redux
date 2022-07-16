@@ -1,0 +1,229 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TasksList snapshot test with tasks 1`] = `
+<div
+  className="tasks col-sm-12 col-md-3"
+>
+  <div
+    className="tasks-list"
+  >
+    <div
+      className="tasks-list-title"
+    >
+      <h4>
+        Unstarted
+      </h4>
+    </div>
+    <hr />
+    <div
+      className="tasks-lists-item d-flex flex-column justify-content-start align-items-center my-2"
+    >
+      <div
+        className="task w-100 d-flex flex-column p-3 my-2 rounded"
+      >
+        <div
+          className="task-header d-flex flex-row justify-content-between align-items-center"
+        >
+          <div
+            className="task-header-title text-primary"
+          >
+            <strong
+              className="title"
+            >
+              A
+            </strong>
+          </div>
+          <div
+            className="task-header-status"
+          >
+            <select
+              aria-label="Change status of task"
+              className="form-select form-select-sm"
+              onChange={[Function]}
+              value="Unstarted"
+            >
+              <option
+                value="Unstarted"
+              >
+                Unstarted
+              </option>
+              <option
+                value="In Progress"
+              >
+                In Progress
+              </option>
+              <option
+                value="Completed"
+              >
+                Completed
+              </option>
+            </select>
+          </div>
+        </div>
+        <hr />
+        <div
+          className="task-body"
+        >
+          a
+        </div>
+        <div
+          className="task-footer"
+        >
+          <div
+            className="Timer"
+          >
+            <small>
+              0
+              s
+            </small>
+          </div>
+        </div>
+      </div>
+      <div
+        className="task w-100 d-flex flex-column p-3 my-2 rounded"
+      >
+        <div
+          className="task-header d-flex flex-row justify-content-between align-items-center"
+        >
+          <div
+            className="task-header-title text-primary"
+          >
+            <strong
+              className="title"
+            >
+              B
+            </strong>
+          </div>
+          <div
+            className="task-header-status"
+          >
+            <select
+              aria-label="Change status of task"
+              className="form-select form-select-sm"
+              onChange={[Function]}
+              value="Unstarted"
+            >
+              <option
+                value="Unstarted"
+              >
+                Unstarted
+              </option>
+              <option
+                value="In Progress"
+              >
+                In Progress
+              </option>
+              <option
+                value="Completed"
+              >
+                Completed
+              </option>
+            </select>
+          </div>
+        </div>
+        <hr />
+        <div
+          className="task-body"
+        >
+          b
+        </div>
+        <div
+          className="task-footer"
+        >
+          <div
+            className="Timer"
+          >
+            <small>
+              0
+              s
+            </small>
+          </div>
+        </div>
+      </div>
+      <div
+        className="task w-100 d-flex flex-column p-3 my-2 rounded"
+      >
+        <div
+          className="task-header d-flex flex-row justify-content-between align-items-center"
+        >
+          <div
+            className="task-header-title text-primary"
+          >
+            <strong
+              className="title"
+            >
+              C
+            </strong>
+          </div>
+          <div
+            className="task-header-status"
+          >
+            <select
+              aria-label="Change status of task"
+              className="form-select form-select-sm"
+              onChange={[Function]}
+              value="Unstarted"
+            >
+              <option
+                value="Unstarted"
+              >
+                Unstarted
+              </option>
+              <option
+                value="In Progress"
+              >
+                In Progress
+              </option>
+              <option
+                value="Completed"
+              >
+                Completed
+              </option>
+            </select>
+          </div>
+        </div>
+        <hr />
+        <div
+          className="task-body"
+        >
+          c
+        </div>
+        <div
+          className="task-footer"
+        >
+          <div
+            className="Timer"
+          >
+            <small>
+              0
+              s
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`TasksList snapshot test without tasks 1`] = `
+<div
+  className="tasks col-sm-12 col-md-3"
+>
+  <div
+    className="tasks-list"
+  >
+    <div
+      className="tasks-list-title"
+    >
+      <h4>
+        In Progress
+      </h4>
+    </div>
+    <hr />
+    <div
+      className="tasks-lists-item d-flex flex-column justify-content-start align-items-center my-2"
+    />
+  </div>
+</div>
+`;

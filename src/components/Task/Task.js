@@ -16,12 +16,12 @@ const Task = (props) => {
     <div className="task w-100 d-flex flex-column p-3 my-2 rounded">
       <div className="task-header d-flex flex-row justify-content-between align-items-center">
         <div className="task-header-title text-primary">
-          <strong>{task.title}</strong>
+          <strong className="title">{task.title}</strong>
         </div>
         <div className="task-header-status">
           <select
             className="form-select form-select-sm"
-            aria-label="Default select example"
+            aria-label="Change status of task"
             value={task.status}
             onChange={(evt) => {
               const newStatus =

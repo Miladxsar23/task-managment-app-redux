@@ -1,8 +1,7 @@
 import * as React from "react";
 import "./TasksList.scss";
 import Task from "../Task/Task";
-const TasksList = (props) => {
-  const { title, onEditTask, filteredTasks } = props;
+const TasksList = ({ filteredTasks, onEditTask, title }) => {
   const rows = filteredTasks.map((task) => {
     return <Task key={task.id} task={task} onEditTask={onEditTask} />;
   });
