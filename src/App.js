@@ -11,7 +11,7 @@ import {
 } from "./actions";
 import FlashMessage from "./components/FlashMessage/FlashMessage";
 import { getGroupAndFilteredTasks, getProjects } from "./reducers/projects";
-class App extends Component {
+export class App extends Component {
   onCreateTask = ({ title, description }) => {
     const { currentProjectId } = this.props;
     this.props.dispatch(
@@ -28,7 +28,6 @@ class App extends Component {
     this.props.dispatch(setCurrentProjectId(Number(evt.target.value)));
   };
   componentDidMount() {
-    console.log(this.props.tasks)
     this.props.dispatch(fetchProjects());
   }
   render() {
@@ -57,13 +56,13 @@ class App extends Component {
 }
 function mapStateToProps(state) {
   const { error, isLoading } = state.projects;
-  const {currentProjectId} = state.page
+  const { currentProjectId } = state.page;
   return {
     tasks: getGroupAndFilteredTasks(state),
     projects: getProjects(state),
     isLoading,
     error,
-    currentProjectId
+    currentProjectId,
   };
 }
 

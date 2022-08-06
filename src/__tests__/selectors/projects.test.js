@@ -74,7 +74,6 @@ describe("project selectors", () => {
     "In Progress" : [{ id: 1, title: "redux react",status: "In Progress", projectId: 0 }], 
     "Completed" : []
    }
-   console.log(getGroupAndFilteredTasks(state))
    expect(getGroupAndFilteredTasks(state)).toEqual(expectedValue)
   })
 });
