@@ -34,8 +34,8 @@
       "id": 3,
       "title": "Create Facebook for dogs",
       "description": "The hottest new social network",
-      "status": "Completed",
-      "timer": 332,
+      "status": "Unstarted",
+      "timer": 350,
       "projectId": 1
     },
     {
@@ -94,8 +94,8 @@
     {
       "title": "assd",
       "description": "asd",
-      "status": "In Progress",
-      "timer": 0,
+      "status": "Completed",
+      "timer": 2,
       "projectId": 1,
       "id": 11
     },
