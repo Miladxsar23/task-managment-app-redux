@@ -5,10 +5,17 @@
   align-items: $align;
 }
 .task {
-  background-color: #fbf8ff;
+  background-color: #ebebeb6b;
+  box-shadow: 22px 23px 0px -17px #ebebebee;
+  transition: all 0.2s;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0px 23px 0px -17px #ebebebee;
+  }
+  scale: 1;
   &-header {
     &-title {
-      color : #7A25FF;
+      color: #7a25ff;
     }
   }
   &-body {
