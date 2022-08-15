@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { createTask, editTask, filterTasks } from "../../actions";
+import { getGroupAndFilteredTasks } from "../../reducers/projects";
 import TasksList from "../TasksList/TasksList";
 import "./TaskPage.scss";
 class TaskPage extends Component {
@@ -23,6 +26,7 @@ class TaskPage extends Component {
   };
   handleResetForm = () => {
     this.setState({
+      showForm : false,
       fields: {
         title: "",
         description: "",
@@ -32,7 +36,10 @@ class TaskPage extends Component {
   handleSubmit = (evt) => {
     evt.preventDefault();
     const { fields } = this.state;
-    this.props.onCreateTask(fields);
+    this.props.onCreateTask({
+      ...fields,
+      currentProjectId: this.props.currentProjectId,
+    });
     this.handleResetForm();
   };
   toggleForm = () => {
@@ -117,6 +124,7 @@ class TaskPage extends Component {
   };
   render() {
     if (this.props.isLoading) {
+      console.log(this.props.isLoading);
       return (
         <div className="loading">
           <span className="loading-indicator"></span>
@@ -146,4 +154,26 @@ class TaskPage extends Component {
     }
   }
 }
-export default TaskPage;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onCreateTask: ({ title, description, currentProjectId }) => {
+      dispatch(createTask({ title, description, projectId: currentProjectId }));
+    },
+    onEditTask: (id, params) => {
+      dispatch(editTask(id, params));
+    },
+    onSearch: (searchterm) => {
+      dispatch(filterTasks(searchterm));
+    },
+  };
+};
+
+const mapStateToProps = (state) => {
+  const { isLoading } = state.projects;
+  return {
+    tasks: getGroupAndFilteredTasks(state),
+    currentProjectId: state.page.currentProjectId,
+    isLoading,
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(TaskPage);
