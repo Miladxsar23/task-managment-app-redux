@@ -66,12 +66,6 @@ function projects(state = initialState, action) {
 /* Selectors function for this reducer */
 
 //input selector
-export const getProjects = (state) => {
-  return Object.keys(state.projects.items).map((projectId) => {
-    const project = state.projects.items[projectId];
-    return project;
-  });
-};
 export const getTaskByProjectId = (state) => {
   const { currentProjectId } = state.page;
   if (!currentProjectId || !state.projects.items[currentProjectId]) {
@@ -82,6 +76,12 @@ export const getTaskByProjectId = (state) => {
 };
 
 //memoizing selector
+export const getProjects = createSelector([(state) => state.projects], (projects) => {
+  return Object.keys(projects.items).map(projectId => {
+    const project = projects.items[projectId]
+    return project
+  }) 
+})
 
 export const getFilteredTasks = createSelector(
   [getTaskByProjectId, getSearchTerm],

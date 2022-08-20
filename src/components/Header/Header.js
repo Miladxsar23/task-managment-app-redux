@@ -5,11 +5,7 @@ import { setCurrentProjectId } from "../../actions";
 import "./Header.scss";
 function Header() {
   const dispatch = useDispatch();
-  const { projects } = useSelector((state) => {
-    return {
-      projects: getProjects(state),
-    };
-  }, shallowEqual);
+  const projects = useSelector(getProjects, shallowEqual);
   const onChangeCurrentProject = (evt) => {
     dispatch(setCurrentProjectId(Number(evt.target.value)));
   };
