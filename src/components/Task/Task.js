@@ -1,13 +1,21 @@
 import * as React from "react";
-import { v4 as uuid } from "uuid";
-import './Task.scss'
+import { useSelector, shallowEqual } from "react-redux";
+import "./Task.scss";
 import Timer from "../Timer/Timer";
 const TASK_STATUS = ["Unstarted", "In Progress", "Completed"];
-const Task = (props) => {
-  const { task } = props;
+function Task(props) {
+  console.log(props.taskId)
+  const task = useSelector(
+    (state) => state.tasks.items[props.taskId],
+    shallowEqual
+  );
+  function onStatusChange(evt) {
+    const newStatus = evt.target.value;
+    props.onEditTask(task.id, { status: newStatus });
+  }
   const options = TASK_STATUS.map((status) => {
     return (
-      <option key={uuid()} value={status}>
+      <option key={status} value={status}>
         {status}
       </option>
     );
@@ -23,11 +31,7 @@ const Task = (props) => {
             className="form-select form-select-sm"
             aria-label="Change status of task"
             value={task.status}
-            onChange={(evt) => {
-              const newStatus =
-                evt.target.options[evt.target.selectedIndex].value;
-              props.onEditTask(task.id, { status: newStatus });
-            }}
+            onChange={onStatusChange}
           >
             {options}
           </select>
@@ -36,10 +40,10 @@ const Task = (props) => {
       <hr />
       <div className="task-body">{task.description}</div>
       <div className="task-footer">
-        <Timer time={task.timer}/>
+        <Timer time={task.timer} />
       </div>
     </div>
   );
-};
+}
 
 export default React.memo(Task);

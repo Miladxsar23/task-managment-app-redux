@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createTask, editTask, filterTasks } from "../../actions";
-import { getGroupAndFilteredTasks } from "../../reducers/projects";
+import {
+  getGroupAndFilteredTaskIds,
+} from "../../reducers/projects";
 import TasksList from "../TasksList/TasksList";
 import "./TaskPage.scss";
 class TaskPage extends Component {
@@ -26,7 +28,7 @@ class TaskPage extends Component {
   };
   handleResetForm = () => {
     this.setState({
-      showForm : false,
+      showForm: false,
       fields: {
         title: "",
         description: "",
@@ -109,14 +111,14 @@ class TaskPage extends Component {
     );
   };
   renderTaskLists = () => {
-    const tasks = this.props.tasks;
-    return Object.keys(tasks).map((status) => {
-      const taskByStatus = tasks[status];
+    const { taskIds } = this.props;
+    return Object.keys(taskIds).map((status) => {
+      const idsByStatus = taskIds[status];
       return (
         <TasksList
           key={status}
           title={status}
-          filteredTasks={taskByStatus}
+          taskIds={idsByStatus}
           onEditTask={this.props.onEditTask}
         />
       );
@@ -171,7 +173,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   const { isLoading } = state.projects;
   return {
-    tasks: getGroupAndFilteredTasks(state),
+    taskIds: getGroupAndFilteredTaskIds(state),
     currentProjectId: state.page.currentProjectId,
     isLoading,
   };

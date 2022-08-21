@@ -1,9 +1,9 @@
 import * as React from "react";
 import "./TasksList.scss";
 import Task from "../Task/Task";
-const TasksList = ({ filteredTasks, onEditTask, title }) => {
-  const rows = filteredTasks.map((task) => {
-    return <Task key={task.id} task={task} onEditTask={onEditTask} />;
+const TasksList = ({ taskIds, onEditTask, title }) => {
+  const rows = taskIds.map((id) => {
+    return <Task key={id} taskId={id} onEditTask={onEditTask} />;
   });
   return (
     <div className="tasks col-sm-12 col-md-3">

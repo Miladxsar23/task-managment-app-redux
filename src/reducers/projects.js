@@ -76,12 +76,16 @@ export const getTaskByProjectId = (state) => {
 };
 
 //memoizing selector
-export const getProjects = createSelector([(state) => state.projects], (projects) => {
-  return Object.keys(projects.items).map(projectId => {
-    const project = projects.items[projectId]
-    return project
-  }) 
-})
+export const getProjects = createSelector(
+  [(state) => state.projects],
+  (projects) => {
+    return Object.keys(projects.items).map((projectId) => {
+      const project = projects.items[projectId];
+      return project;
+    });
+  }
+);
+
 
 export const getFilteredTasks = createSelector(
   [getTaskByProjectId, getSearchTerm],
@@ -99,6 +103,19 @@ export const getGroupAndFilteredTasks = createSelector(
       groupTasks[status] = tasks.filter((t) => t.status === status);
     });
     return groupTasks;
+  }
+);
+
+export const getGroupAndFilteredTaskIds = createSelector(
+  [getFilteredTasks],
+  (tasks) => {
+    const groupTaskIds = {};
+    TASK_STATUS.forEach((status) => {
+      groupTaskIds[status] = tasks
+        .filter((task) => task.status === status)
+        .map((task) => task.id);
+    });
+    return groupTaskIds;
   }
 );
 
